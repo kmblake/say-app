@@ -4,6 +4,16 @@
   <%= devise_error_messages! %>
 
   <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
   </div>
@@ -19,6 +29,26 @@
   <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :school %><br />
+    <%= f.select :school, Submitter::SCHOOLS %>
+  </div>
+
+  <div class="field">
+    <%= f.label :teacher %><br />
+    <%= f.text_field :teacher, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :grade %><br />
+    <%= f.select :grade, Submitter::GRADES %>
+  </div>
+
+  <div class="field">
+    <%= f.label :bio %><br />
+    <%= f.text_field :bio, autocomplete: "off" %>
   </div>
 
   <div class="actions">
