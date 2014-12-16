@@ -5,4 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   ROLES = %w[submitter editor admin]
+
+  def name 
+    first_name + " " + last_name
+  end
 end
