@@ -52,3 +52,9 @@ gem 'paperclip', github: 'thoughtbot/paperclip'
 
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 
+# Management of ENV variables
+gem 'figaro'
+
+# AWS gem
+gem 'aws-sdk'
+
