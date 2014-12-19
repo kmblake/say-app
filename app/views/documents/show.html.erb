@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @document.title %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @document.user.name %>
+</p>
+<p>URL: <%= URI(request.url) + @document.file.url %> </p>
+<iframe src="https://docs.google.com/viewer?url=<%= URI(request.url) + @document.file.url %>&embedded=true" 
+width="100%" height="800" frameborder="0" >
+<p>Your browser does not support iframes.</p>
+</iframe>
+
+<%= link_to 'Edit', edit_document_path(@document) %> |
+<%= link_to 'Back', documents_path %>
