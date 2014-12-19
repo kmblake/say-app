@@ -7,13 +7,36 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <ul class="hmenu">
-    <%= render 'devise/menu/registration_items' %>
-    <%= render 'devise/menu/login_items' %>
-  </ul>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-  <%= yield %>
+
+   <nav class="navbar navbar-default navbar-static-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <!-- class = navbar brand -->
+          <%= link_to 'Stanford Anthology For Youth', root_path, class: 'navbar-brand' %>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><%= link_to 'Home', root_path %></li>
+            <%= render 'devise/menu/registration_items' %>
+            <%= render 'devise/menu/login_items' %>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <% if (user_signed_in?) %>
+              <% if (current_user.role?(:editor)) %>
+                <li><a href="#about">Editor Tools</a></li>
+              <% elsif (current_user.role?(:admin)) %>
+                <li><a href="#about">Admin</a></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  <div class="container">
+    <% if notice then %><div class="alert alert-info"><%= notice %></div><% end %>
+    <% if alert then %><div class="alert alert-danger"><%= alert %></div><% end %>
+    <%= yield %>
+  </div>
 
 </body>
 </html>
