@@ -38,5 +38,9 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+# User role management
+gem 'cancancan', '~> 1.9'
+
+# User authentication
 gem 'devise'
 
