@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :artworks
+
+  resources :documents
+
   devise_for :users, :controllers => { registrations: 'registrations' }
   get 'home/index'
 
