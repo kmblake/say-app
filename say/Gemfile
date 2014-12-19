@@ -50,3 +50,5 @@ gem 'bootstrap-sass', '~> 3.3.1'
 # Paperclip for file upload
 gem 'paperclip', github: 'thoughtbot/paperclip'
 
+gem 'sprockets-rails', :require => 'sprockets/railtie'
+
