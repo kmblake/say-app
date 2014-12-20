@@ -33,7 +33,8 @@ class DocumentsController < ApplicationController
 
   def destroy
     @document.destroy
-    respond_with(@document)
+    flash.notice = @document.title + " was successfully removed."
+    redirect_to submissions_show_path
   end
 
   private
@@ -42,6 +43,6 @@ class DocumentsController < ApplicationController
     end
 
     def document_params
-      params.require(:document).permit(:title, :user_id, :file)
+      params.require(:document).permit(:title, :user_id, :style, :file)
     end
 end
