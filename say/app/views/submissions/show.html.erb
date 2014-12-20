@@ -1,7 +1,9 @@
 <div class="jumbotron">
   <h1>My Submissions</h1>
 </div>
-
+  <%= link_to 'Upload Written Submission', new_document_path, class: 'btn btn-lg btn-success' %>
+  <%= link_to 'Upload Artwork', new_artwork_path, class: 'btn btn-lg btn-primary' %>
+  
 <% if @user.documents.size > 0 %>
   <h2>Written Submissions</h2>
   <table class="table table-striped">
