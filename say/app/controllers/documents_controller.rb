@@ -34,6 +34,7 @@ class DocumentsController < ApplicationController
   def update
     @document.update(document_params)
     respond_with(@document)
+    # redirect_to document_path(@document)
   end
 
   def destroy

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { registrations: 'registrations' }
   get 'home/index'
+  get 'home/help'
 
   get 'submissions/show'
 
