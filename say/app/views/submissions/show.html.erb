@@ -1,0 +1,27 @@
+<div class="jumbotron">
+  <h1>My Submissions</h1>
+</div>
+
+<% if @user.documents.size > 0 %>
+  <h2>Written Submissions</h2>
+  <table class="table table-striped">
+    <thead>
+      <th>#</th>
+      <th>Title</th>
+      <th>Style</th>
+      <th>Submitted On:</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <% @user.documents.each_with_index do |doc, i| %>
+        <tr>
+          <td><%= i + 1 %></td>
+          <td><%= link_to doc.title, document_path(doc.id)  %></td>
+          <td><%= doc.style %></td>
+          <td><%= doc.created_at.strftime("%m/%d/%Y at %I:%M %p") %></td>
+          <td><%= link_to 'Remove', doc, method: :delete %>
+        </tr>
+      <% end %>
+  </table>
+<% end %>
+

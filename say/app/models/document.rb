@@ -7,4 +7,6 @@ class Document < ActiveRecord::Base
              "application/msword", 
              "application/vnd.openxmlformats-officedocument.wordprocessingml.document", 
              "text/plain"]
+
+  STYLES = %w[Fiction Nonfiction Poetry]
 end
