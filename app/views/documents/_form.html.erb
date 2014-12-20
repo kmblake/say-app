@@ -1,7 +1,6 @@
-<%= form_for @document, :url => documents_path, :html => { :multipart => true, class: 'say-form'  } do |f| %>
   <% if @document.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@document.errors.count, "error") %> prohibited this document from being saved:</h2>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2><%= pluralize(@document.errors.count, "error") %> prohibited this submission from being saved:</h2>
 
       <ul>
       <% @document.errors.full_messages.each do |message| %>
@@ -10,7 +9,8 @@
       </ul>
     </div>
   <% end %>
-
+  
+<%= form_for @document, :url => documents_path, :html => { :multipart => true, class: 'say-form'  } do |f| %>
   <div class="form-group">
     <%= f.label :title %><br>
     <%= f.text_field :title, class: 'form-control' %>
@@ -28,6 +28,6 @@
 
   <div class="actions">
     <%= f.submit 'Submit', class: 'btn btn-success' %>
-    <%= link_to 'Back', documents_path, class: "btn btn-danger right" %>
+    <%= link_to 'Back', submissions_show_path, class: "btn btn-danger right" %>
   </div>
 <% end %>
