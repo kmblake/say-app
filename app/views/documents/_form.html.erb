@@ -10,7 +10,7 @@
     </div>
   <% end %>
   
-<%= form_for @document, :url => documents_path, :html => { :multipart => true, class: 'say-form'  } do |f| %>
+<%= form_for @document, :html => { :multipart => true, class: 'say-form'  } do |f| %>
   <div class="form-group">
     <%= f.label :title %><br>
     <%= f.text_field :title, class: 'form-control' %>
@@ -22,8 +22,12 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :file %><br>
-    <%= f.file_field :file %>
+    <% if @document.file.exists? %>
+      <strong>Uploaded filename:</strong> <%= @document.file_file_name %><br/>
+    <% else %>
+      <%= f.label :file %><br>
+      <%= f.file_field :file %>
+    <% end %>
   </div>
 
   <div class="actions">
