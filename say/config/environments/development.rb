@@ -44,8 +44,8 @@ Rails.application.configure do
     domain: 'gmail.com',
     authentication: 'plain',
     enable_starttls_auto: true,
-    user_name: 'stanforday',
-    password: 'guatemala248'
+    user_name: ENV['gmail_username'],
+    password: ENV['gmail_pw']
   }
 
   config.paperclip_defaults = {
