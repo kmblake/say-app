@@ -1,0 +1,32 @@
+  <% if @artwork.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2><%= pluralize(@artwork.errors.count, "error") %> prohibited this submission from being saved:</h2>
+
+      <ul>
+      <% @artwork.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+<%= form_for @artwork, :html => { :multipart => true, class: 'say-form'  } do |f| %>
+  <div class="form-group">
+    <%= f.label :title %><br>
+    <%= f.text_field :title, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <% if @artwork.image.exists? %> 
+      <strong>Uploaded filename:</strong> <%= @artwork.image_file_name %><br/>
+    <% else %>
+      <%= f.label :image %><br>
+      <%= f.file_field :image %>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Submit', class: 'btn btn-success' %>
+    <%= link_to 'Back', submissions_show_path, class: "btn btn-danger right" %>
+  </div>
+<% end %>
