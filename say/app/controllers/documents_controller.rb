@@ -3,6 +3,8 @@ class DocumentsController < ApplicationController
 
   respond_to :html
 
+  load_and_authorize_resource
+
   def index
     @documents = Document.all
     respond_with(@documents)
