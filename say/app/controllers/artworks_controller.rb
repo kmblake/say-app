@@ -13,15 +13,20 @@ class ArtworksController < ApplicationController
   end
 
   def new
-    @artwork = Artwork.new
-    respond_with(@artwork)
+    if current_user.artworks.count < Artwork::MAX_ARTWORKS
+      @artwork = Artwork.new
+      respond_with(@artwork)
+    else 
+      flash.alert = "You have already uploaded the maximum number of art submissions.  In order to upload a new submission, you must remove an existing one. To remove a submission, go to \"My Submissions\" and select the artwork you would like to remove."
+      redirect_to :back
+    end
   end
 
   def edit
   end
 
   def create
-    @artwork = Artwork.new(artwork_params)
+    @artwork = current_user.artworks.new(artwork_params)
     @artwork.save
     respond_with(@artwork)
   end
@@ -33,7 +38,8 @@ class ArtworksController < ApplicationController
 
   def destroy
     @artwork.destroy
-    respond_with(@artwork)
+    flash.notice = @artwork.title + " was successfully removed."
+    redirect_to submissions_show_path
   end
 
   private
@@ -42,6 +48,6 @@ class ArtworksController < ApplicationController
     end
 
     def artwork_params
-      params.require(:artwork).permit(:title, :user_id)
+      params.require(:artwork).permit(:title, :user_id, :image)
     end
 end

@@ -1,14 +1,10 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @artwork.title %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @artwork.user_id %>
-</p>
-
-<%= link_to 'Edit', edit_artwork_path(@artwork) %> |
-<%= link_to 'Back', artworks_path %>
+<div class="jumbotron">
+  <h1 class="center"><%= @artwork.title %></h1>
+  <p class="center">If you cannot see your artwork here, unfortunately we won't be able to see it either!</p>
+</div>
+<div class='center bottom-margin'>
+  <%= link_to 'Edit Title', edit_artwork_path(@artwork), class: 'btn btn-primary form-button' %>
+  <%= link_to 'Done', submissions_show_path, class: 'btn btn-success form-button' %>
+  <%= link_to 'Remove Submission', @artwork, method: :delete, class: 'btn btn-danger' %>
+</div>
+<div><%= image_tag @artwork.image.url(:medium), class: 'centered-img' %></div>
