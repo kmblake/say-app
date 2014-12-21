@@ -58,3 +58,6 @@ gem 'figaro'
 # AWS gem
 gem 'aws-sdk'
 
+# Gem for Heroku
+gem 'rails_12factor', group: :production
+
