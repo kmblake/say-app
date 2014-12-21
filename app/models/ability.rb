@@ -32,8 +32,8 @@ class Ability
     user ||= User.new # guest user (not logged in)
 
     if user.role = "submitter"
-        can :read, Document
-        can :read, Artwork
+        can :manage, Document
+        can :manage, Artwork
     end
   end
 end
