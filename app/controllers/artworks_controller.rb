@@ -3,6 +3,8 @@ class ArtworksController < ApplicationController
 
   respond_to :html
 
+  load_and_authorize_resource
+
   def index
     @artworks = Artwork.all
     respond_with(@artworks)
