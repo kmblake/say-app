@@ -20,7 +20,8 @@
     <% if @artwork.image.exists? %> 
       <strong>Uploaded filename:</strong> <%= @artwork.image_file_name %><br/>
     <% else %>
-      <%= f.label :image %><br>
+      <%= f.label :image %>
+      <p class="help-block">Art should be sent as high-quality JPEG files. Art may be sent in color or in black and white.</p>
       <%= f.file_field :image %>
     <% end %>
   </div>

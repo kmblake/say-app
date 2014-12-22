@@ -25,7 +25,8 @@
     <% if @document.file.exists? %>
       <strong>Uploaded filename:</strong> <%= @document.file_file_name %><br/>
     <% else %>
-      <%= f.label :file %><br>
+      <%= f.label :file %>
+      <p class="help-block">Written submissions should be in a .doc, .docx, or .pdf file.</p>
       <%= f.file_field :file %>
     <% end %>
   </div>
