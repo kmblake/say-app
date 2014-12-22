@@ -3,6 +3,8 @@ class Document < ActiveRecord::Base
   has_attached_file :file
 
   validates :title, presence: true
+  
+  # disallows multiple submissions of a single style
   validates :style, style: true
 
   validates_attachment_presence :file
