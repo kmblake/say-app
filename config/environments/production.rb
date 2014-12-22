@@ -77,7 +77,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Action Mailer setup
-  config.action_mailer.default_url_options = { host: 'secure-retreat-6034.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'stanforday.herokuapp.com' }
 
   # Raise if error delivering message
   config.action_mailer.raise_delivery_errors = true
