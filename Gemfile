@@ -62,4 +62,7 @@ gem 'aws-sdk'
 # Gem for Heroku
 gem 'rails_12factor', group: :production
 
+# Select2
+gem 'select2-rails', '~> 3.5.9.1'
+
 
