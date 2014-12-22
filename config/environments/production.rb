@@ -79,8 +79,7 @@ Rails.application.configure do
   # Action Mailer setup
   config.action_mailer.default_url_options = { host: 'stanforday.herokuapp.com' }
 
-  # Raise if error delivering message
-  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp 
 
   # Action mailer setup
   config.action_mailer.smtp_settings = {

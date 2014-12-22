@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Say</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="login-body">
+<div class="container">
+  <h1>Welcome to the Stanford Anthology For Youth Submission System</h1>
+  <% if flash[:notice] then %><div class="alert alert-info"><%= flash[:notice] %></div><% end %>
+  <% if flash[:alert] then %><div class="alert alert-danger"><%= flash[:alert] %></div><% end %>
+  <%= yield %>
+</div>
+
+</body>
+</html>
