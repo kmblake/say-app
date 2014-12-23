@@ -33,7 +33,8 @@ Rails.application.routes.draw do
 
   resources :users do
     member do
-      put 'convert_to_admin'
+      put 'toggle_admin_role'
+      put 'toggle_approved_status'
     end
     collection do 
       get 'users'

@@ -20,8 +20,13 @@ class User < ActiveRecord::Base
     first_name + " " + last_name
   end
 
-  def convert_to_admin
-    self.role = "Admin"
+  def toggle_admin
+    if self.role == "Editor"
+      self.role = "Admin"
+    elsif self.role == "Admin"
+      self.role = "Editor"
+    end
     self.save
   end
+
 end

@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -29,14 +29,21 @@ class UsersController < ApplicationController
     @admins = Admin.all
   end
 
-  def convert_to_admin
+  def toggle_admin_role
     set_user
-    if (@user.role == "Editor")
-      @user.convert_to_admin
-      @user.save
-      flash.notice = @user.name + " is now an admin!"
+    @user.toggle_admin
+    flash.notice = @user.name + "'s role has been changed to " + @user.role
+    redirect_to admin_tools_users_path
+  end
+
+  def toggle_approved_status
+    set_user
+    @user.toggle(:approved)
+    @user.save
+    if (@user.approved)
+      flash.notice = @user.name + " is now an approved editor."
     else
-      flash.alert = @user.name " is not an editor.  Cannot convert to admin."
+      flash.notice = @user.name + " is no longer an approved editor"
     end
     redirect_to admin_tools_users_path
   end

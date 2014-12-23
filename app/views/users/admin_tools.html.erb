@@ -11,15 +11,15 @@
     <tbody>
       <% @unapproved_editors.each do |editor| %>
         <tr>
-          <td><%= editor.name %></td>
-          <td><%= editor.email %></td>
-          <td>test</td>
-          <td>test</td>
+          <td class="col-md-4"><%= editor.name %></td>
+          <td class="col-md-4"><%= editor.email %></td>
+          <td class="col-md-2"><%= link_to 'Approve', toggle_approved_status_user_path(editor), method: :put %></td>
+          <td class="col-md-2"><%= link_to 'Deny', user_path(editor), method: :delete, data: { confirm: "This will delete the account.  Are you sure?" } %></td>
         </tr>
       <% end %>
   </table>
 <% else %>
-  <p>No unapproved editors.
+  <p>No unapproved editors.</p>
 <% end %>
 
 <h2>Approved Editors</h2>
@@ -34,10 +34,10 @@
     <tbody>
       <% @approved_editors.each do |editor| %>
         <tr>
-          <td><%= editor.name %></td>
-          <td><%= editor.email %></td>
-          <td><%= link_to 'Make Admin', convert_to_admin_user_path(editor), method: :put %></td>
-          <td>test</td>
+          <td class="col-md-4"><%= editor.name %></td>
+          <td class="col-md-4"><%= editor.email %></td>
+          <td class="col-md-2"><%= link_to 'Make Admin', toggle_admin_role_user_path(editor), method: :put %></td>
+          <td class="col-md-2"><%= link_to 'Unapprove', toggle_approved_status_user_path(editor), method: :put %></td>
         </tr>
       <% end %>
   </table>
@@ -52,18 +52,16 @@
       <th>Name</th>
       <th>Email</th>
       <th></th>
-      <th></th>
     </thead>
     <tbody>
       <% @admins.each do |admin| %>
         <tr>
-          <td><%= admin.name %></td>
-          <td><%= admin.email %></td>
-          <td>test</td>
-          <td>test</td>
+          <td class="col-md-4"><%= admin.name %></td>
+          <td class="col-md-4"><%= admin.email %></td>
+          <td class="col-md-4"><%= link_to 'Make Editor', toggle_admin_role_user_path(admin), method: :put %></td>
         </tr>
       <% end %>
   </table>
 <% else %>
-  <p>No approved editors.  You need to start recruiting NOW!!!</p>
+  <p>No admins.  Oh dear...</p>
 <% end %>
