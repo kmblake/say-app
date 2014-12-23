@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  self.inheritance_column = 'role'
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -7,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :documents
   has_many :artworks
 
-  ROLES = %w[submitter editor admin]
+  ROLES = %w[Submitter Editor Admin]
 
   validates :first_name, :last_name, :school, :teacher, :grade, :bio, presence: true 
 

@@ -21,12 +21,12 @@
           <ul class="nav navbar-nav navbar-right">
             <% if (user_signed_in?) %>
               <li><%= link_to 'Help', home_help_path %></li>
-              <% if current_user.role == "submitter" %>
+              <% if current_submitter %>
                 <li><%= link_to 'My Submissions', submissions_show_path %></li>
-              <% elsif (current_user.role?(:editor)) %>
+              <% elsif (current_editor || current_admin) %>
                 <li><a href="#about">Editor Tools</a></li>
               <% end %>
-              <% if (current_user.role?(:admin)) %>
+              <% if (current_admin) %>
                 <li><a href="#about">Admin</a></li>
               <% end %>
             <% end %>
