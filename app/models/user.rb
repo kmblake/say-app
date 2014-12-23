@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
 
   ROLES = %w[Submitter Editor Admin]
 
-  validates :first_name, :last_name, :school, :teacher, :grade, :bio, presence: true 
+  validates :first_name, :last_name, presence: true 
 
   def role?(base_role)
     ROLES.index(base_role.to_s) <= ROLES.index(role)

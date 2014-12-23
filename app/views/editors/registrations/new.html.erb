@@ -1,29 +1,44 @@
-<h2>Sign up</h2>
+<div class="jumbotron">
+  <h1 class="center">Editor Sign Up</h1>
+</div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+<% if resource.errors.any? %>
+    <div class="alert alert-danger"><%= devise_error_messages! %></div>
+<% end %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name),  html: {class: "form-register say-form"}) do |f| %>
+
+ <!--  <%= f.hidden_field :role, value: User::ROLES[0] %> -->
+
+  <div class="form-group">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, autocomplete: "off",  autofocus: true, class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
     <%= f.label :password %>
     <% if @validatable %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+  <div class="actions center">
+    <%= f.submit "Sign up", class: "btn btn-lg btn-success" %>
   </div>
 <% end %>
-
-<%= render "editors/shared/links" %>
