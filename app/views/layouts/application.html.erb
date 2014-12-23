@@ -27,7 +27,7 @@
                 <li><a href="#about">Editor Tools</a></li>
               <% end %>
               <% if (current_admin) %>
-                <li><a href="#about">Admin</a></li>
+                <li><%= link_to 'Admin Tools', admin_tools_users_path %></li>
               <% end %>
             <% end %>
           </ul>

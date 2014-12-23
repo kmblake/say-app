@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   devise_for :users, :skip => :registrations
   devise_for :submitters, :editors, :skip => :sessions, :controllers => { registrations: 'registrations'}
-  devise_for :admins, :skip => [:sessions, :registrations]
+  devise_for :admins, :skip => :sessions
   # devise_for :users, :controllers => { sessions: 'sessions' }
 
 
@@ -32,8 +32,12 @@ Rails.application.routes.draw do
   #   resources :products
 
   resources :users do
+    member do
+      put 'convert_to_admin'
+    end
     collection do 
       get 'users'
+      get 'admin_tools'
     end
   end
 

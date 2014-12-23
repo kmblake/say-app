@@ -1,0 +1,69 @@
+
+<h2>Unapproved Editors</h2>
+<% if @unapproved_editors.any? %>
+  <table class="table table-striped">
+    <thead>
+      <th>Name</th>
+      <th>Email</th>
+      <th></th>
+      <th></th>
+    </thead>
+    <tbody>
+      <% @unapproved_editors.each do |editor| %>
+        <tr>
+          <td><%= editor.name %></td>
+          <td><%= editor.email %></td>
+          <td>test</td>
+          <td>test</td>
+        </tr>
+      <% end %>
+  </table>
+<% else %>
+  <p>No unapproved editors.
+<% end %>
+
+<h2>Approved Editors</h2>
+<% if @approved_editors.any? %>
+  <table class="table table-striped">
+    <thead>
+      <th>Name</th>
+      <th>Email</th>
+      <th></th>
+      <th></th>
+    </thead>
+    <tbody>
+      <% @approved_editors.each do |editor| %>
+        <tr>
+          <td><%= editor.name %></td>
+          <td><%= editor.email %></td>
+          <td><%= link_to 'Make Admin', convert_to_admin_user_path(editor), method: :put %></td>
+          <td>test</td>
+        </tr>
+      <% end %>
+  </table>
+<% else %>
+  <p>No approved editors.  You need to start recruiting NOW!!!</p>
+<% end %>
+
+<h2>Admins</h2>
+<% if @admins.any? %>
+  <table class="table table-striped">
+    <thead>
+      <th>Name</th>
+      <th>Email</th>
+      <th></th>
+      <th></th>
+    </thead>
+    <tbody>
+      <% @admins.each do |admin| %>
+        <tr>
+          <td><%= admin.name %></td>
+          <td><%= admin.email %></td>
+          <td>test</td>
+          <td>test</td>
+        </tr>
+      <% end %>
+  </table>
+<% else %>
+  <p>No approved editors.  You need to start recruiting NOW!!!</p>
+<% end %>

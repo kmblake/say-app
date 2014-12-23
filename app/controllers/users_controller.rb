@@ -23,6 +23,25 @@ class UsersController < ApplicationController
     end
   end
 
+  def admin_tools
+    @unapproved_editors = Editor.where(approved: false)
+    @approved_editors = Editor.where(approved: true)
+    @admins = Admin.all
+  end
+
+  def convert_to_admin
+    set_user
+    if (@user.role == "Editor")
+      @user.convert_to_admin
+      @user.save
+      flash.notice = @user.name + " is now an admin!"
+    else
+      flash.alert = @user.name " is not an editor.  Cannot convert to admin."
+    end
+    redirect_to admin_tools_users_path
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user

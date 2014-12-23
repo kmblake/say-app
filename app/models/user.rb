@@ -19,4 +19,9 @@ class User < ActiveRecord::Base
   def name 
     first_name + " " + last_name
   end
+
+  def convert_to_admin
+    self.role = "Admin"
+    self.save
+  end
 end
