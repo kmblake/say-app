@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   has_many :documents
   has_many :artworks
+  has_many :comments
+  has_many :ratings
 
   ROLES = %w[submitter editor admin]
 

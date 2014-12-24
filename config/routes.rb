@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :ratings
+
+  resources :comments
+
   get 'submissions/show'
 
   resources :artworks
