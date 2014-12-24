@@ -2,6 +2,8 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
 
+  load_and_authorize_resource
+
   # GET /users
   # GET /users.json
   def index
@@ -31,8 +33,12 @@ class UsersController < ApplicationController
 
   def toggle_admin_role
     set_user
-    @user.toggle_admin
-    flash.notice = @user.name + "'s role has been changed to " + @user.role
+    if @user == current_user
+      flash.alert = "You cannot edit your own admin status"
+    else 
+      @user.toggle_admin
+      flash.notice = @user.name + "'s role has been changed to " + @user.role
+    end
     redirect_to admin_tools_users_path
   end
 

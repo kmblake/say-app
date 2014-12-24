@@ -24,7 +24,7 @@
               <% if current_submitter %>
                 <li><%= link_to 'My Submissions', submissions_show_path %></li>
               <% elsif (current_editor || current_admin) %>
-                <li><a href="#about">Editor Tools</a></li>
+                <li><%= link_to 'Editor Tools', documents_path %></li>
               <% end %>
               <% if (current_admin) %>
                 <li><%= link_to 'Admin Tools', admin_tools_users_path %></li>
