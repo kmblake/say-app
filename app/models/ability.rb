@@ -29,11 +29,24 @@ class Ability
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
 
-    user ||= User.new # guest user (not logged in)
+    user ||= Submitter.new # guest user (not logged in)
 
-    if user.role = "submitter"
+    if user.role == "Submitter"
         can :manage, Document
         can :manage, Artwork
+        can [:create, :read, :update, :destroy], Submitter
+    end
+
+    if user.role == "Editor" && user.approved
+        can [:read, :update], Document
+        can [:read, :update], Artwork
+        can [:create, :read, :update, :destroy], User
+    end
+
+    if user.role == "Admin"
+        can :manage, Document
+        can :manage, Artwork
+        can :manage, User
     end
   end
 end

@@ -5,8 +5,12 @@ Rails.application.routes.draw do
 
   resources :documents
 
-  devise_for :users, :controllers => { registrations: 'registrations'}
+  devise_for :users, :skip => :registrations
+  devise_for :submitters, :editors, :skip => :sessions, :controllers => { registrations: 'registrations'}
+  devise_for :admins, :skip => :sessions
   # devise_for :users, :controllers => { sessions: 'sessions' }
+
+
   get 'home/index'
   get 'home/help'
 
@@ -28,8 +32,13 @@ Rails.application.routes.draw do
   #   resources :products
 
   resources :users do
+    member do
+      put 'toggle_admin_role'
+      put 'toggle_approved_status'
+    end
     collection do 
       get 'users'
+      get 'admin_tools'
     end
   end
 

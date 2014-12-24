@@ -25,6 +25,10 @@
 
   <div class="actions">
     <%= f.submit "Log In", class: "btn btn-lg btn-primary btn-block" %>
-    <%= link_to "Sign Up", new_registration_path(resource_name), class: "btn btn-lg btn-success btn-block" %><br />
+    <%= link_to "Sign Up", new_submitter_registration_path, class: "btn btn-lg btn-success btn-block" %><br />
   </div>
 <% end %>
+
+  <div class="editor-create-button">
+    <%= link_to "Editor Sign Up", new_editor_registration_path, class: "btn btn-lg btn-info btn-block" %><br />
+  </div>
