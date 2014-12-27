@@ -44,3 +44,13 @@ form.say-form {
   width: 500px;
 }
 
+.editor-create-button {
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+
+  a {
+    width: 200px;
+  }
+}
+
