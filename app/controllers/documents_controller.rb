@@ -15,7 +15,7 @@ class DocumentsController < ApplicationController
   end
 
   def new
-    if current_user.documents.count < Document::MAX_DOCUMENTS
+    if current_submitter && current_submitter.documents.count < Document::MAX_DOCUMENTS
       @document = Document.new
       respond_with(@document)
     else 
@@ -28,7 +28,11 @@ class DocumentsController < ApplicationController
   end
 
   def create
-    @document = current_user.documents.new(document_params)
+    if current_submitter
+      @document = current_user.documents.new(document_params)
+    else
+      @document = current_user.documents.new(document_params)
+    end
     @document.save
     respond_with(@document)
   end

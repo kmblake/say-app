@@ -39,6 +39,8 @@ Rails.application.routes.draw do
     collection do 
       get 'users'
       get 'admin_tools'
+      get 'new_submitter'
+      post 'create_submitter'
     end
   end
 

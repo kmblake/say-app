@@ -1,4 +1,60 @@
-<p id="notice"><%= notice %></p>
+<div class="jumbotron">
+  <h1><%=  @user.name %></h1>
+  <p><%= @user.role + if (@user.role == 'Editor' && !@user.approved) then ' (UNAPPROVED)' else '' end %></p>
+</div>
+<ul class="stripped">
+  <li><strong>Email:</strong> <%= @user.email %></li>
+  <% if @user.role == 'Submitter' %>
+    <li><strong>School:</strong> <%= @user.school %></li>
+    <li><strong>Teacher:</strong> <%= @user.teacher %></li>
+    <li><strong>Bio:</strong> <%= @user.bio %></li>
+  <% end %>
+</ul>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<% if @user.documents.any? %>
+  <h2>Written Submissions</h2>
+  <table class="table table-striped">
+    <thead>
+      <th>#</th>
+      <th>Title</th>
+      <th>Style</th>
+      <th>Submitted On:</th>
+    </thead>
+    <tbody>
+      <% @user.documents.each_with_index do |doc, i| %>
+        <tr>
+          <td><%= i + 1 %></td>
+          <td><%= link_to doc.title, document_path(doc.id)  %></td>
+          <td><%= doc.style %></td>
+          <td><%= doc.created_at.strftime("%m/%d/%Y at %I:%M %p") %></td>
+        </tr>
+      <% end %>
+  </table>
+<% end %>
+
+<% if @user.artworks.any? %>
+  <h2>Art Submissions</h2>
+  <table class="table table-striped">
+    <thead>
+      <th>#</th>
+      <th>Title</th>
+      <th>Thumbnail</th>
+      <th>Submitted On:</th>
+    </thead>
+    <tbody>
+      <% @user.artworks.each_with_index do |art, i| %>
+        <tr>
+          <td><%= i + 1 %></td>
+          <td><%= link_to art.title, artwork_path(art.id)  %></td>
+          <td><%= image_tag art.image.url(:thumb) %></td>
+          <td><%= art.created_at.strftime("%m/%d/%Y at %I:%M %p") %></td>
+        </tr>
+      <% end %>
+  </table>
+<% end %>
+
+<% if @user.role == 'Editor' %>
+  <h2>History</h2>
+    <p>Nothing here yet.<p>
+   <!-- show past ratings and comments here -->
+<% end %>

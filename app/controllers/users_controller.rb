@@ -7,12 +7,13 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @submitters = Submitter.all
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
+    @user = User.find(params[:id])
   end
 
   # DELETE /users/1
@@ -54,6 +55,18 @@ class UsersController < ApplicationController
     redirect_to admin_tools_users_path
   end
 
+  def new_submitter
+    @submitter = Submitter.new
+  end
+
+  def create_user
+    @submitter = Submitter.new(user_params)
+    if @submitter.save
+      flash.notice = "You have successfully added " + @submitter.name
+    else 
+      falsh.notice = "Save failed!  Try again."
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
