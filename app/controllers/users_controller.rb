@@ -2,6 +2,8 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
 
+  respond_to :html  
+
   load_and_authorize_resource
 
   # GET /users
@@ -60,12 +62,16 @@ class UsersController < ApplicationController
   end
 
   def create_submitter
-    @submitter = Submitter.new(user_params)
+    @submitter = Submitter.new(submitter_params)
+    pw = @submitter.random_pw
     if @submitter.save
-      flash.notice = "You have successfully added " + @submitter.name
+      flash.notice = "You have successfully added " + @submitter.name + " with temporary password " + pw
     else 
-      falsh.notice = "Save failed!  Try again."
+      flash.notice = "Save failed!  Try again."
     end
+    puts "WHEEEEEEEEEEE"
+    puts @submitter
+    redirect_to user_path(@submitter.id)
   end
 
   private
@@ -75,7 +81,7 @@ class UsersController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:first_name, :last_name, :school, :grade, :teacher, :bio, :email)
+    def submitter_params
+      params.require(:submitter).permit(:first_name, :last_name, :school, :grade, :teacher, :bio, :email)
     end
 end

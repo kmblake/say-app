@@ -10,7 +10,7 @@
   </div>
 <% end %>
 
-<%= form_for(@submitter,  html: {class: "form-register say-form"}) do |f| %>
+<%= form_for(@submitter,  url: create_submitter_users_path, html: {class: "form-register say-form"}) do |f| %>
 
  <!--  <%= f.hidden_field :role, value: User::ROLES[0] %> -->
 

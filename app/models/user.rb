@@ -33,7 +33,9 @@ class User < ActiveRecord::Base
   end
 
   def random_pw
-    SecureRandom.hex(HEX_LENGTH)
+    pw = SecureRandom.hex(HEX_LENGTH)
+    self.password = pw
+    pw
   end
 
 end
