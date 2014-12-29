@@ -26,4 +26,9 @@ class Document < ActiveRecord::Base
     end
     avg = total.to_f / ratings.count
   end
+
+  def already_rated(editor)
+    Rating.exists?(:user_id => editor.id, :document_id => id)
+  end
+
 end

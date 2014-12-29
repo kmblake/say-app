@@ -28,15 +28,19 @@
     <% i = 0 %>
     <% @submitters.each do |submitter| %>
       <% submitter.documents.each do |doc| %>
-        <tr>
-          <td><%= i += 1 %></td>
-          <td><%= link_to doc.title, document_path(doc.id)  %></td>
-          <td><%= doc.style %></td>
-          <td><%= submitter.first_name + ' ' + submitter.last_name %></td>
-          <td><%= submitter.school %></td>
-          <td><%= doc.ratings.count %></td>
-          <td><%= doc.avg_rating %></td>
-        </tr>
+        <% if doc.already_rated(current_user) %>
+          <tr id="already-read">
+        <% else %>
+          <tr>
+        <% end %>
+            <td><%= i += 1 %></td>
+            <td><%= link_to doc.title, document_path(doc.id)  %></td>
+            <td><%= doc.style %></td>
+            <td><%= submitter.first_name + ' ' + submitter.last_name %></td>
+            <td><%= submitter.school %></td>
+            <td><%= doc.ratings.count %></td>
+            <td><%= doc.avg_rating %></td>
+          </tr>
       <% end %>
     <% end %>
   </tbody>
