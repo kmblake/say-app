@@ -12,6 +12,7 @@ class DocumentsController < ApplicationController
 
   def show
     @rating = Rating.new
+    @comment = Comment.new
     respond_with(@document)  
   end
 
