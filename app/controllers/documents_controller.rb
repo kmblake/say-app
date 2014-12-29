@@ -11,10 +11,8 @@ class DocumentsController < ApplicationController
   end
 
   def show
-    respond_with(@document)
     @rating = Rating.new
-    @rating.document_id = @document.id
-    @rating.user_id = current_user.id
+    respond_with(@document)  
   end
 
   def new

@@ -33,11 +33,11 @@
 		</iframe>
 	</span>
 	<span class="editor-tools">
-		<%= form_for([@document, @rating]) do |f| %>
+		<%= form_for ([@document, @rating]) do |f| %>
 	
 			<div class="form-group editor-tools">
 
-			    <%= f.select :rating, Document::RATINGS, {prompt: "Rate this piece"}, class: "form-control", id: "rating-select" %>
+			    <%= f.select :rating_val, Document::RATINGS, {prompt: "Rate this piece"}, class: "form-control", id: "rating-select" %>
 			 </div>
 			 <div class="actions center editor-tools">
     			<%= f.submit "Save", class: "btn btn-lg btn-success" %>
