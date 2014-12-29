@@ -4,7 +4,7 @@ class Document < ActiveRecord::Base
   has_many :ratings
   has_attached_file :file
 
-  validates :title, presence: true
+  validates :title, :user_id, presence: true
   
   # disallows multiple submissions of a single style
   validates :style, style: true
@@ -16,6 +16,7 @@ class Document < ActiveRecord::Base
              "text/plain"]
 
   STYLES = %w[Fiction Nonfiction Poetry]
+  STATUS = {under_review: 'Under Review', accepted: 'Accepted', rejected: 'Not Accepted'}
   MAX_DOCUMENTS = 3
   RATINGS = [1, 2, 3, 4]
 

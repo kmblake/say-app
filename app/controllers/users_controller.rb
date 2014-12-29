@@ -2,17 +2,20 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
 
+  respond_to :html  
+
   load_and_authorize_resource
 
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @submitters = Submitter.all
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
+    @user = User.find(params[:id])
   end
 
   # DELETE /users/1
@@ -54,6 +57,40 @@ class UsersController < ApplicationController
     redirect_to admin_tools_users_path
   end
 
+  def new_submitter
+    @user = Submitter.new
+  end
+
+  def create_submitter
+    @submitter = Submitter.new(submitter_params)
+    @submitter.random_pw
+    if @submitter.save
+      UserMailer.account_for_you(@submitter).deliver
+      flash.notice = "You have successfully added " + @submitter.name + "."
+      redirect_to user_path(@submitter)
+    else 
+      flash.notice = "Save failed!  Try again."
+      redirect_to :back
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    ## Most user updates should occur using the devise edit_registration_path.  This is only for admins to edit other users.
+      if params[:submitter][:password].blank?
+        params[:submitter].delete(:password)
+        params[:submitter].delete(:password_confirmation)
+      end
+     if @user.update(submitter_params)
+      flash.notice = @user.name + " was updated successfully."
+      redirect_to user_path(@user)
+    else 
+      render :edit
+    end
+    
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -62,7 +99,7 @@ class UsersController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params[:user]
+    def submitter_params
+      params.require(:submitter).permit(:first_name, :last_name, :school, :grade, :teacher, :bio, :email, :password, :password_confirmation)
     end
 end

@@ -1,4 +1,23 @@
-<p id="notice"><%= notice %></p>
+<div class="jumbotron">
+  <h1><%=  @user.name %></h1>
+  <p><%= @user.role + if (@user.role == 'Editor' && !@user.approved) then ' (UNAPPROVED)' else '' end %></p>
+</div>
+<ul class="list-group">
+  <li class="list-group-item"><strong>Email:</strong> <%= @user.email %></li>
+  <% if @user.role == 'Submitter' %>
+    <li class="list-group-item"><strong>School:</strong> <%= @user.school %></li>
+    <li class="list-group-item"><strong>Teacher:</strong> <%= @user.teacher %></li>
+    <li class="list-group-item"><strong>Bio:</strong> <%= @user.bio %></li>
+    <% if current_admin %>
+      <li class="list-group-item center"><%= link_to 'Edit ' + @user.role, edit_user_path(@user), class: "btn btn-info top-margin" %></li>
+    <% end %>
+  <% end %>
+</ul>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<% if @user.role == 'Submitter' %>
+  <%= render 'submissions' %>
+<% else %>
+  <h2>History</h2>
+    <p>Nothing here yet.<p>
+   <!-- show past ratings and comments here -->
+<% end %>

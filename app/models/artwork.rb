@@ -6,9 +6,10 @@ class Artwork < ActiveRecord::Base
 
   validates_attachment_presence :image
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
-  validates :title, presence: true
+  validates :title, :user_id, presence: true
 
   MAX_ARTWORKS = 3
+<<<<<<< HEAD
   RATINGS = [1, 2, 3, 4]
 
   def avg_rating
@@ -27,4 +28,7 @@ class Artwork < ActiveRecord::Base
   def already_rated(editor)
     Rating.exists?(:user_id => editor.id, :artwork_id => id)
   end
+=======
+
+>>>>>>> master
 end

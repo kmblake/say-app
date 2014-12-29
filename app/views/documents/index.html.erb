@@ -15,7 +15,7 @@
         <tr>
           <td><%= i + 1 %></td>
           <td><%= link_to doc.title, document_path(doc.id)  %></td>
-          <td><%= doc.user.name %>
+          <td><%= link_to doc.user.name, user_path(doc.user.id) %>
           <td><%= doc.style %></td>
           <td><%= doc.created_at.strftime("%m/%d/%Y at %I:%M %p") %></td>
           <td><%= link_to 'Remove', doc, method: :delete %>
