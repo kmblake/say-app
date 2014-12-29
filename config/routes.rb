@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
   resources :ratings
   resources :comments
-  resources :artworks
+  resources :artworks do
+    resources :ratings, :comments
+  end
 
   resources :documents do
     resources :ratings, :comments

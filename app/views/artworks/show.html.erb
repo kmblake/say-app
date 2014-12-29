@@ -1,10 +1,50 @@
-<div class="jumbotron">
-  <h1 class="center"><%= @artwork.title %></h1>
-  <p class="center">If you cannot see your artwork here, unfortunately we won't be able to see it either!</p>
-</div>
-<div class='center bottom-margin'>
-  <%= link_to 'Edit Title', edit_artwork_path(@artwork), class: 'btn btn-primary form-button' %>
-  <%= link_to 'Done', submissions_show_path, class: 'btn btn-success form-button' %>
-  <%= link_to 'Remove Submission', @artwork, method: :delete, class: 'btn btn-danger' %>
-</div>
-<div><%= image_tag @artwork.image.url(:medium), class: 'centered-img' %></div>
+<% if current_submitter %>
+	<div class="jumbotron">
+	  <h1 class="center"><%= @artwork.title %></h1>
+	  <p class="center">If you cannot see your artwork here, unfortunately we won't be able to see it either!</p>
+	</div>
+	<div class='center bottom-margin'>
+	  <%= link_to 'Edit Title', edit_artwork_path(@artwork), class: 'btn btn-primary form-button' %>
+	  <%= link_to 'Done', submissions_show_path, class: 'btn btn-success form-button' %>
+	  <%= link_to 'Remove Submission', @artwork, method: :delete, class: 'btn btn-danger' %>
+	</div>
+	<div><%= image_tag @artwork.image.url(:medium), class: 'centered-img' %></div>
+<% end %>
+
+<% if current_editor || current_admin %>
+	<div class="jumbotron">
+	  <h1 class="center"><%= @artwork.title %></h1>
+	</div>
+	<div><%= image_tag @artwork.image.url(:medium), class: 'centered-img' %></div>
+	<span class="editor-tools">
+		<%= form_for ([@artwork, @rating]) do |f| %>
+	
+			<div class="form-group editor-tools">
+
+			    <%= f.select :rating_val, Artwork::RATINGS, {prompt: "Rate this piece"}, class: "form-control", id: "rating-select" %>
+			 </div>
+			 <div class="actions center editor-tools">
+    			<%= f.submit "Save Rating", class: "btn btn-lg btn-success" %>
+  			</div>
+  		<% end %>
+
+  		<br />
+  		<%= form_for ([@artwork, @comment]) do |f| %>
+	
+			<div class="form-group editor-tools">
+			    <%= f.text_area :comment_text, cols: 100, rows: 8, class: "form-control" %>
+			 </div>
+			 <div class="actions center editor-tools">
+    			<%= f.submit "Add Comment", class: "btn btn-lg btn-info" %>
+  			</div>
+
+  		<% end %>
+  		<br />
+  		<% @artwork.comments.reverse.each do |comment| %>
+  			<% commenter = User.find(comment.user_id) %>
+  			<p><b><%= commenter.first_name %> <%= commenter.last_name %>: </b> <%= comment.comment_text %></p>
+  			<br />
+  		<% end %>
+	</span>
+<% end %>
+
