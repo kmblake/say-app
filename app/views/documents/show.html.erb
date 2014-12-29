@@ -40,9 +40,26 @@
 			    <%= f.select :rating_val, Document::RATINGS, {prompt: "Rate this piece"}, class: "form-control", id: "rating-select" %>
 			 </div>
 			 <div class="actions center editor-tools">
-    			<%= f.submit "Save", class: "btn btn-lg btn-success" %>
+    			<%= f.submit "Save Rating", class: "btn btn-lg btn-success" %>
   			</div>
 
+  		<% end %>
+  		<br />
+  		<%= form_for ([@document, @comment]) do |f| %>
+	
+			<div class="form-group editor-tools">
+			    <%= f.text_area :comment_text, cols: 100, rows: 8, class: "form-control" %>
+			 </div>
+			 <div class="actions center editor-tools">
+    			<%= f.submit "Add Comment", class: "btn btn-lg btn-info" %>
+  			</div>
+
+  		<% end %>
+  		<br />
+  		<% @document.comments.reverse.each do |comment| %>
+  			<% commenter = User.find(comment.user_id) %>
+  			<p><b><%= commenter.first_name %> <%= commenter.last_name %>: </b> <%= comment.comment_text %></p>
+  			<br />
   		<% end %>
 	</span>
 <% end %>

@@ -11,7 +11,13 @@ class DocumentsController < ApplicationController
   end
 
   def show
-    @rating = Rating.new
+    if Rating.exists?(:user_id => current_user.id, :document_id => @document.id)
+      @rating = Rating.find(:user_id => current_user.id, :document_id => @document.id)
+      already_rated = true
+    else
+      @rating = Rating.new
+      already_rated = false
+    end
     @comment = Comment.new
     respond_with(@document)  
   end
