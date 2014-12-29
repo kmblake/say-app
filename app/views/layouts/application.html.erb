@@ -15,10 +15,6 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <%= render 'devise/menu/registration_items' %>
-            <%= render 'devise/menu/login_items' %>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
             <% if (user_signed_in?) %>
               <li><%= link_to 'Help', home_help_path %></li>
               <% if current_submitter %>
@@ -28,6 +24,8 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Editor Tools <span class="caret"></span></a>
                   </button>
                   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                    <li role="presentation"><%= link_to 'Written Submissions', home_index_path %></li>
+                    <li role="presentation"><%= link_to 'Art Submissions', artworks_path %></li>
                     <li role="presentation"><%= link_to 'Submitter Index', users_path %></li>
                   </ul>
                 </li>
@@ -44,6 +42,10 @@
                 </li>
               <% end %>
             <% end %>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <%= render 'devise/menu/registration_items' %>
+            <%= render 'devise/menu/login_items' %>
           </ul>
         </div>
       </div>

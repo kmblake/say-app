@@ -9,7 +9,6 @@ class Artwork < ActiveRecord::Base
   validates :title, :user_id, presence: true
 
   MAX_ARTWORKS = 3
-<<<<<<< HEAD
   RATINGS = [1, 2, 3, 4]
 
   def avg_rating
@@ -28,7 +27,4 @@ class Artwork < ActiveRecord::Base
   def already_rated(editor)
     Rating.exists?(:user_id => editor.id, :artwork_id => id)
   end
-=======
-
->>>>>>> master
 end
