@@ -1,5 +1,78 @@
 <div class="jumbotron"><h1>Edit User: <%= @user.name %></h1></div>
 
-<%= render 'form' %>
+<% if @user.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger">
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this submission from being saved:</h2>
 
-<%= link_to 'Show', @user %>
+    <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for(@user, url: user_path, html: {class: "form-register say-form"}) do |f| %>
+
+
+  <div class="form-group">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, autocomplete: "off",  autofocus: true, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password %><i> (leave blank if you don't want to change it)</i>
+    <% if @validatable %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <% if @user.role == 'Submitter' %>
+
+  <div class="form-group">
+    <%= f.label :school %><br />
+    <%= f.select :school, Submitter::SCHOOLS, {prompt: "Select your school..."}, class: "form-control", id: "school-select" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :teacher %><br />
+    <%= f.text_field :teacher, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :grade %><br />
+    <%= f.select :grade, Submitter::GRADES, {prompt: "Select your grade..."}, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :bio %>
+    <p class="help-block">Include a short personal bio with your submission. In one or two third-person sentences, tell us about yourself!  If we publish your submission, we'll include your bio as well.  If you want to change it later, dont' worry!  You can edit your bio anytime before the submission deadline.</p>
+    <%= f.text_area :bio, cols: 100, rows: 8, class: "form-control" %>
+  </div>
+
+  <% end %>
+
+  <div class="actions center">
+    <%= f.submit "Update User", class: "btn btn-lg btn-success" %>
+  </div>
+<% end %>
+
+<script>
+    $("#school-select").select2();
+</script>

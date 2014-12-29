@@ -2,14 +2,20 @@
   <h1><%=  @user.name %></h1>
   <p><%= @user.role + if (@user.role == 'Editor' && !@user.approved) then ' (UNAPPROVED)' else '' end %></p>
 </div>
-<ul class="stripped">
-  <li><strong>Email:</strong> <%= @user.email %></li>
+<ul class="list-group">
+  <li class="list-group-item"><strong>Email:</strong> <%= @user.email %></li>
   <% if @user.role == 'Submitter' %>
-    <li><strong>School:</strong> <%= @user.school %></li>
-    <li><strong>Teacher:</strong> <%= @user.teacher %></li>
-    <li><strong>Bio:</strong> <%= @user.bio %></li>
+    <li class="list-group-item"><strong>School:</strong> <%= @user.school %></li>
+    <li class="list-group-item"><strong>Teacher:</strong> <%= @user.teacher %></li>
+    <li class="list-group-item"><strong>Bio:</strong> <%= @user.bio %></li>
+    <% if current_admin %>
+      <li class="list-group-item center"><%= link_to 'Edit ' + @user.role, edit_user_path(@user), class: "btn btn-info top-margin" %></li>
+    <% end %>
   <% end %>
 </ul>
+
+
+
 
 <% if @user.role == 'Submitter' %>
 

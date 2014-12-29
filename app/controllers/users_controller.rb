@@ -58,7 +58,7 @@ class UsersController < ApplicationController
   end
 
   def new_submitter
-    @submitter = Submitter.new
+    @user = Submitter.new
   end
 
   def create_submitter
@@ -72,6 +72,23 @@ class UsersController < ApplicationController
       flash.notice = "Save failed!  Try again."
       redirect_to :back
     end
+  end
+
+  def edit
+  end
+
+  def update
+    ## Most user updates should occur using the devise edit_registration_path.  This is only for admins to edit other users.
+      if params[:submitter][:password].blank?
+        params[:submitter].delete(:password)
+        params[:submitter].delete(:password_confirmation)
+      end
+     if @user.update(submitter_params)
+      flash.notice = @user.name + " was updated successfully."
+      redirect_to user_path(@user)
+    else 
+      render :edit
+    end
     
   end
 
@@ -83,6 +100,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def submitter_params
-      params.require(:submitter).permit(:first_name, :last_name, :school, :grade, :teacher, :bio, :email)
+      params.require(:submitter).permit(:first_name, :last_name, :school, :grade, :teacher, :bio, :email, :password, :password_confirmation)
     end
 end
