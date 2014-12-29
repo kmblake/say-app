@@ -11,6 +11,15 @@
   <% end %>
   
 <%= form_for @document, :html => { :multipart => true, class: 'say-form'  } do |f| %>
+  <% if current_admin %>
+    <div class="form-group">
+      <%= f.label :user_id, "Submitter" %><br>
+      <%= f.select(:user_id, options_from_collection_for_select(Submitter.all, 'id', 'name', params[:user_id]), {}, {id: 'user-select', class: 'form-control'}) %>
+    </div>
+  <% else %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+  <% end %>
+
   <div class="form-group">
     <%= f.label :title %><br>
     <%= f.text_field :title, class: 'form-control' %>
@@ -36,3 +45,7 @@
     <%= link_to 'Back', submissions_show_path, class: "btn btn-danger right" %>
   </div>
 <% end %>
+
+<script>
+    $("#user-select").select2();
+</script>

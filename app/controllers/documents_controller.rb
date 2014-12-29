@@ -15,12 +15,12 @@ class DocumentsController < ApplicationController
   end
 
   def new
-    if current_submitter && current_submitter.documents.count < Document::MAX_DOCUMENTS
-      @document = Document.new
-      respond_with(@document)
-    else 
+    if current_submitter && current_submitter.documents.count > Document::MAX_DOCUMENTS
       flash.alert = "You have already uploaded the maximum number of written submissions.  In order to upload a new submission, you must remove an existing one. To remove a submission, go to \"My Submissions\" and select the document you would like to remove."
       redirect_to :back
+    else 
+      @document = Document.new
+      respond_with(@document)
     end
   end
 
@@ -28,11 +28,7 @@ class DocumentsController < ApplicationController
   end
 
   def create
-    if current_submitter
-      @document = current_user.documents.new(document_params)
-    else
-      @document = current_user.documents.new(document_params)
-    end
+    @document = Document.new(document_params)
     @document.save
     respond_with(@document)
   end
@@ -55,6 +51,6 @@ class DocumentsController < ApplicationController
     end
 
     def document_params
-      params.require(:document).permit(:title, :user_id, :style, :file)
+      params.require(:document).permit(:title, :user_id, :style, :file, :user_id)
     end
 end

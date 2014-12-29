@@ -1,11 +1,11 @@
 <div class="jumbotron">
   <h1 class="center"><%= @document.title %> <span class="weak"> (<%= @document.style %>)</span></h1>
-  <p class="center">This is how your submission will appear to the SAY editors.  If you cannot see it here, unfortunately we won't be able to see it either!</p>
+  <% if current_submitter %><p class="center">This is how your submission will appear to the SAY editors.  If you cannot see it here, unfortunately we won't be able to see it either!</p><% end %>
 </div>
 
 <div class='center bottom-margin'>
   <%= link_to 'Edit Submission Info', edit_document_path(@document), class: 'btn btn-primary form-button' %>
-  <%= link_to 'Done', submissions_show_path, class: 'btn btn-success form-button' %>
+  <%= link_to 'Done', if current_submitter then submissions_show_path else user_path(@document.user) end, class: 'btn btn-success form-button' %>
   <%= link_to 'Remove Submission', @document, method: :delete, class: 'btn btn-danger' %>
 </div>
 <% doc_viewer_url = 'https://docs.google.com/viewer?url=' + @document.file.url %>

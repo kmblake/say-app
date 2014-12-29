@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
 
   validates :first_name, :last_name, presence: true 
 
+  attr_accessor :temp_pw
+
   def role?(base_role)
     ROLES.index(base_role.to_s) <= ROLES.index(role)
   end
@@ -35,7 +37,7 @@ class User < ActiveRecord::Base
   def random_pw
     pw = SecureRandom.hex(HEX_LENGTH)
     self.password = pw
-    pw
+    self.temp_pw = pw
   end
 
 end

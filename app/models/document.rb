@@ -2,7 +2,7 @@ class Document < ActiveRecord::Base
   belongs_to :user
   has_attached_file :file
 
-  validates :title, presence: true
+  validates :title, :user_id, presence: true
   
   # disallows multiple submissions of a single style
   validates :style, style: true
