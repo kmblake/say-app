@@ -17,4 +17,5 @@ class Document < ActiveRecord::Base
 
   STYLES = %w[Fiction Nonfiction Poetry]
   MAX_DOCUMENTS = 3
+  RATINGS = [1, 2, 3, 4]
 end

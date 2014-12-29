@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
-  resources :ratings
-
-  resources :comments
 
   get 'submissions/show'
 
+  resources :ratings
+  resources :comments
   resources :artworks
 
-  resources :documents
+  resources :documents do
+    resources :ratings, :comments
+  end
 
   devise_for :users, :skip => :registrations
   devise_for :submitters, :editors, :skip => :sessions, :controllers => { registrations: 'registrations'}

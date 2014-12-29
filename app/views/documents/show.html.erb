@@ -18,15 +18,32 @@
 	</iframe>
 <% end %>
 
-<% if current_editor %>
+<% if current_editor || current_admin %>
 	<div class="jumbotron">
 	  <h1 class="center"><%= @document.title %> <span class="weak"> (<%= @document.style %>)</span></h1>
 	</div>
-	<% doc_viewer_url = 'https://docs.google.com/viewer?url=' + @document.file.url %>
-	<p class="help-block">Preview window not showing up?  Try <%= link_to 'this link', doc_viewer_url, target: "_blank" %>.</p>
-	<iframe src="<%= doc_viewer_url %>&embedded=true" 
-	width="70%" height="800" frameborder="0" >
-	<p>Your browser does not support iframes.</p>
-	</iframe>
+	<div>
+		<% doc_viewer_url = 'https://docs.google.com/viewer?url=' + @document.file.url %>
+		<p class="help-block">Preview window not showing up?  Try <%= link_to 'this link', doc_viewer_url, target: "_blank" %>.</p>
+	</div>
+	<span>
+		<iframe src="<%= doc_viewer_url %>&embedded=true" 
+		width="70%" height="800" frameborder="0" >
+		<p>Your browser does not support iframes.</p>
+		</iframe>
+	</span>
+	<span class="editor-tools">
+		<%= form_for([@document, @rating]) do |f| %>
+	
+			<div class="form-group editor-tools">
+
+			    <%= f.select :rating_val, Document::RATINGS, {prompt: "Rate this piece"}, class: "form-control", id: "rating-select" %>
+			 </div>
+			 <div class="actions center editor-tools">
+    			<%= f.submit "Submit", class: "btn btn-lg btn-success" %>
+  			</div>
+
+  		<% end %>
+	</span>
 <% end %>
 
