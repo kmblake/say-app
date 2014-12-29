@@ -1,0 +1,44 @@
+<% if current_submitter %>
+    <div class="jumbotron">
+      <h1>Welcome, <%= current_user.first_name %>!</h1>
+    </div>
+  <% if can? :create, Document %>
+    <div>
+      <h2>Submission Guidelines:</h2>
+      <p> All submissions must be recieved no later than <strong>January 11, 2015 at 11:59 PM</strong>.  Please submit <strong>no more than 3 pieces of writing of contrasting styles (poetry, fiction, and nonfiction) and 3 pieces of art</strong>.  Show us your very best work!  Written submissions should be in a .doc, .docx, or .pdf file.  Art should be sent as high-quality JPEG files. Art may be sent in color or in black and white.<br><br>Note: By submitting, you give SAY permission to publish your work in the print anthology as well as online and to do minimal amounts of editing.</p>
+    </div>
+    <%= link_to 'Upload Written Submission', new_document_path, class: 'btn btn-lg btn-success' %>
+    <%= link_to 'Upload Artwork', new_artwork_path, class: 'btn btn-lg btn-primary right' %>
+  <% end %>
+<% end %>
+
+<% if current_editor || current_admin %>
+  <h2>Written Submissions</h2>
+  <table class="table table-striped">
+  <thead>
+    <th>#</th>
+    <th>Title</th>
+    <th>Style</th>
+    <th>Author</th>
+    <th>School</th>
+    <th># of Ratings</th>
+    <th>Average Rating</th>
+  </thead>
+  <tbody>
+    <% i = 0 %>
+    <% @submitters.each do |submitter| %>
+      <% submitter.documents.each do |doc| %>
+        <tr>
+          <td><%= i += 1 %></td>
+          <td><%= link_to doc.title, document_path(doc.id)  %></td>
+          <td><%= doc.style %></td>
+          <td><%= submitter.first_name + ' ' + submitter.last_name %></td>
+          <td><%= submitter.school %></td>
+          <td><%= doc.ratings.count %></td>
+          <td><%= doc.avg_rating %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+<% end %>

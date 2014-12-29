@@ -18,4 +18,12 @@ class Document < ActiveRecord::Base
   STYLES = %w[Fiction Nonfiction Poetry]
   MAX_DOCUMENTS = 3
   RATINGS = [1, 2, 3, 4]
+
+  def avg_rating
+    total = 0
+    for rating in ratings
+      total += rating.rating_val
+    end
+    avg = total.to_f / ratings.count
+  end
 end
