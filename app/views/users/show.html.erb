@@ -14,57 +14,8 @@
   <% end %>
 </ul>
 
-
-
-
 <% if @user.role == 'Submitter' %>
-
-  <h2>Written Submissions</h2>
-  <% if @user.documents.any? %>
-    <table class="table table-striped">
-      <thead>
-        <th>#</th>
-        <th>Title</th>
-        <th>Style</th>
-        <th>Submitted On</th>
-        <th>Status</th>
-      </thead>
-      <tbody>
-        <% @user.documents.each_with_index do |doc, i| %>
-          <tr>
-            <td><%= i + 1 %></td>
-            <td><%= link_to doc.title, document_path(doc.id)  %></td>
-            <td><%= doc.style %></td>
-            <td><%= doc.created_at.strftime("%m/%d/%Y at %I:%M %p") %></td>
-            <td><%= doc.status %></td>
-          </tr>
-        <% end %>
-    </table>
-  <% end %>
-  <%= link_to 'Upload Written Submission', new_document_path(user_id: @user.id), class: 'btn btn-lg btn-success' %><br>
-
-  <h2>Art Submissions</h2>
-  <% if @user.artworks.any? %>
-    
-    <table class="table table-striped">
-      <thead>
-        <th>#</th>
-        <th>Title</th>
-        <th>Thumbnail</th>
-        <th>Submitted On:</th>
-      </thead>
-      <tbody>
-        <% @user.artworks.each_with_index do |art, i| %>
-          <tr>
-            <td><%= i + 1 %></td>
-            <td><%= link_to art.title, artwork_path(art.id)  %></td>
-            <td><%= image_tag art.image.url(:thumb) %></td>
-            <td><%= art.created_at.strftime("%m/%d/%Y at %I:%M %p") %></td>
-          </tr>
-        <% end %>
-    </table>
-  <% end %>
-  <%= link_to 'Upload Artwork', new_artwork_path(user_id: @user.id), class: 'btn btn-lg btn-primary' %>
+  <%= render 'submissions' %>
 <% else %>
   <h2>History</h2>
     <p>Nothing here yet.<p>

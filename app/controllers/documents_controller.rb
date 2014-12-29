@@ -15,7 +15,7 @@ class DocumentsController < ApplicationController
   end
 
   def new
-    if current_submitter && current_submitter.documents.count > Document::MAX_DOCUMENTS
+    if current_submitter && current_submitter.documents.count >= Document::MAX_DOCUMENTS
       flash.alert = "You have already uploaded the maximum number of written submissions.  In order to upload a new submission, you must remove an existing one. To remove a submission, go to \"My Submissions\" and select the document you would like to remove."
       redirect_to :back
     else 
@@ -40,9 +40,14 @@ class DocumentsController < ApplicationController
   end
 
   def destroy
+    submitter = @document.user
     @document.destroy
     flash.notice = @document.title + " was successfully removed."
-    redirect_to submissions_show_path
+    if current_submitter
+      redirect_to submissions_show_path
+    else 
+      redirect_to user_path(submitter)
+    end
   end
 
   private
