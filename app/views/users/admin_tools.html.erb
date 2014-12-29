@@ -11,7 +11,7 @@
     <tbody>
       <% @unapproved_editors.each do |editor| %>
         <tr>
-          <td class="col-md-4"><%= editor.name %></td>
+          <td class="col-md-4"><%= link_to editor.name, user_path(editor) %></td>
           <td class="col-md-4"><%= editor.email %></td>
           <td class="col-md-2"><%= link_to 'Approve', toggle_approved_status_user_path(editor), method: :put %></td>
           <td class="col-md-2"><%= link_to 'Deny', user_path(editor), method: :delete, data: { confirm: "This will delete the account.  Are you sure?" } %></td>
@@ -34,7 +34,7 @@
     <tbody>
       <% @approved_editors.each do |editor| %>
         <tr>
-          <td class="col-md-4"><%= editor.name %></td>
+          <td class="col-md-4"><%= link_to editor.name, user_path(editor) %></td>
           <td class="col-md-4"><%= editor.email %></td>
           <td class="col-md-2"><%= link_to 'Make Admin', toggle_admin_role_user_path(editor), method: :put %></td>
           <td class="col-md-2"><%= link_to 'Unapprove', toggle_approved_status_user_path(editor), method: :put %></td>
@@ -56,7 +56,7 @@
     <tbody>
       <% @admins.each do |admin| %>
         <tr>
-          <td class="col-md-4"><%= admin.name %></td>
+          <td class="col-md-4"><%= link_to admin.name, user_path(admin) %></td>
           <td class="col-md-4"><%= admin.email %></td>
           <td class="col-md-4"><%= link_to 'Make Editor', toggle_admin_role_user_path(admin), method: :put %></td>
         </tr>

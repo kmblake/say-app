@@ -64,5 +64,6 @@ gem 'rails_12factor', group: :production
 
 # Select2
 gem 'select2-rails', '~> 3.5.9.1'
+# gem 'select2-sass-bootstrap-rails'
 
 

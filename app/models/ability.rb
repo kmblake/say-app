@@ -34,7 +34,7 @@ class Ability
     if user.role == "Submitter"
         can :manage, Document
         can :manage, Artwork
-        can [:create, :read, :update, :destroy], Submitter
+        can [:create, :read, :destroy], Submitter
     end
 
     if user.role == "Editor" && user.approved

@@ -4,7 +4,8 @@ class Artwork < ActiveRecord::Base
 
   validates_attachment_presence :image
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
-  validates :title, presence: true
+  validates :title, :user_id, presence: true
 
   MAX_ARTWORKS = 3
+
 end
