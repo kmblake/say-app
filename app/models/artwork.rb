@@ -7,4 +7,5 @@ class Artwork < ActiveRecord::Base
   validates :title, :user_id, presence: true
 
   MAX_ARTWORKS = 3
+
 end

@@ -14,5 +14,6 @@ class Document < ActiveRecord::Base
              "text/plain"]
 
   STYLES = %w[Fiction Nonfiction Poetry]
+  STATUS = {under_review: 'Under Review', accepted: 'Accepted', rejected: 'Not Accepted'}
   MAX_DOCUMENTS = 3
 end
