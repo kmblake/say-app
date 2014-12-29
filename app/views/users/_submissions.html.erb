@@ -22,7 +22,7 @@
         <% end %>
     </table>
   <% end %>
-  <%= link_to 'Upload Written Submission', new_document_path(user_id: @user.id), class: 'btn btn-lg btn-success' %><br>
+  <%= if can? :create, Document then link_to 'Upload Written Submission', new_document_path(user_id: @user.id), class: 'btn btn-lg btn-success' end %><br>
 
   <h2>Art Submissions</h2>
   <% if @user.artworks.any? %>
@@ -49,4 +49,4 @@
         <% end %>
     </table>
   <% end %>
-  <%= link_to 'Upload Artwork', new_artwork_path(user_id: @user.id), class: 'btn btn-lg btn-primary' %>
+  <%= if can? :create, Artwork then link_to 'Upload Artwork', new_artwork_path(user_id: @user.id), class: 'btn btn-lg btn-primary' end %>

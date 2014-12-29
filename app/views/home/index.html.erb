@@ -11,7 +11,4 @@
     <%= link_to 'Upload Artwork', new_artwork_path, class: 'btn btn-lg btn-primary right' %>
   <% end %>
 
-  <% if (current_editor || current_admin) %>
-    <h2><%= link_to "Submitter Index", users_path %></h2>
-  <% end %>
 <% end %>
