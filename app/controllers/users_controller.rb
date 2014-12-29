@@ -56,10 +56,10 @@ class UsersController < ApplicationController
   end
 
   def new_submitter
-    @submitter = Submitter.new
+    @submitter = User.new
   end
 
-  def create_user
+  def create_submitter
     @submitter = Submitter.new(user_params)
     if @submitter.save
       flash.notice = "You have successfully added " + @submitter.name
@@ -76,6 +76,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params[:user]
+      params.require(:user).permit(:first_name, :last_name, :school, :grade, :teacher, :bio, :email)
     end
 end

@@ -1,17 +1,62 @@
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<% if @submitter.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger">
+    <h2><%= pluralize(@submitter.errors.count, "error") %> prohibited this submission from being saved:</h2>
 
-      <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
+    <ul>
+    <% @submitter.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
   </div>
 <% end %>
+
+<%= form_for(@submitter,  html: {class: "form-register say-form"}) do |f| %>
+
+ <!--  <%= f.hidden_field :role, value: User::ROLES[0] %> -->
+
+  <div class="form-group">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, autocomplete: "off",  autofocus: true, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, class: "form-control" %>
+  </div>
+
+  <p>A password will be auto-generated on creation</p>
+
+  <div class="form-group">
+    <%= f.label :school %><br />
+    <%= f.select :school, Submitter::SCHOOLS, {prompt: "Select your school..."}, class: "form-control", id: "school-select" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :teacher %><br />
+    <%= f.text_field :teacher, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :grade %><br />
+    <%= f.select :grade, Submitter::GRADES, {prompt: "Select your grade..."}, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :bio %>
+    <p class="help-block">Include a short personal bio with your submission. In one or two third-person sentences, tell us about yourself!  If we publish your submission, we'll include your bio as well.  If you want to change it later, dont' worry!  You can edit your bio anytime before the submission deadline.</p>
+    <%= f.text_area :bio, cols: 100, rows: 8, class: "form-control" %>
+  </div>
+
+  <div class="actions center">
+    <%= f.submit "Sign Up Student", class: "btn btn-lg btn-success" %>
+  </div>
+<% end %>
+
+<script>
+    $("#school-select").select2();
+</script>

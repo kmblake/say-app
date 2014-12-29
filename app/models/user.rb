@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
 
   ROLES = %w[Submitter Editor Admin]
 
+  # Needs to be half of min PW length
+  HEX_LENGTH = 3
+
   validates :first_name, :last_name, presence: true 
 
   def role?(base_role)
@@ -27,6 +30,10 @@ class User < ActiveRecord::Base
       self.role = "Editor"
     end
     self.save
+  end
+
+  def random_pw
+    SecureRandom.hex(HEX_LENGTH)
   end
 
 end
