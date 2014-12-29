@@ -37,10 +37,10 @@
 	
 			<div class="form-group editor-tools">
 
-			    <%= f.select :rating_val, Document::RATINGS, {prompt: "Rate this piece"}, class: "form-control", id: "rating-select" %>
+			    <%= f.select :rating, Document::RATINGS, {prompt: "Rate this piece"}, class: "form-control", id: "rating-select" %>
 			 </div>
 			 <div class="actions center editor-tools">
-    			<%= f.submit "Submit", class: "btn btn-lg btn-success" %>
+    			<%= f.submit "Save", class: "btn btn-lg btn-success" %>
   			</div>
 
   		<% end %>
