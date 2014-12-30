@@ -23,6 +23,10 @@
   margin: auto;
 }
 
+.left-img {
+  width: 70%;
+}
+
 form.say-form {
   width: 500px;
   margin: auto;
@@ -56,7 +60,9 @@ form.say-form {
 
 .editor-tools {
   vertical-align: top;
-  width: 20%;
+  width: 25%;
+  display: inline-block;
+  float: right;
 }
 
 #already-read {

@@ -15,27 +15,28 @@
 	<div class="jumbotron">
 	  <h1 class="center"><%= @artwork.title %></h1>
 	</div>
-	<div><%= image_tag @artwork.image.url(:medium), class: 'centered-img' %></div>
+	<span><%= image_tag @artwork.image.url(:medium), class: 'left-img' %></span>
 	<span class="editor-tools">
 		<%= form_for ([@artwork, @rating]) do |f| %>
 	
-			<div class="form-group editor-tools">
-
+			<div class="form-group">
+				<%= f.label :rating, "Your rating:" %><br />
 			    <%= f.select :rating_val, Artwork::RATINGS, {prompt: "Rate this piece"}, class: "form-control", id: "rating-select" %>
 			 </div>
-			 <div class="actions center editor-tools">
-    			<%= f.submit "Save Rating", class: "btn btn-lg btn-success" %>
+			 <div class="actions center">
+    			<%= f.submit "Save Rating", class: "btn btn-success" %>
   			</div>
   		<% end %>
-
   		<br />
+  		
   		<%= form_for ([@artwork, @comment]) do |f| %>
 	
-			<div class="form-group editor-tools">
+			<div class="form-group">
+				<%= f.label :comment, "Comment:" %><br />
 			    <%= f.text_area :comment_text, cols: 100, rows: 8, class: "form-control" %>
 			 </div>
-			 <div class="actions center editor-tools">
-    			<%= f.submit "Add Comment", class: "btn btn-lg btn-info" %>
+			 <div class="actions center">
+    			<%= f.submit "Add Comment", class: "btn btn-info" %>
   			</div>
 
   		<% end %>
