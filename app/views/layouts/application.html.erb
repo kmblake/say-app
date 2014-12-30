@@ -19,7 +19,7 @@
               <li><%= link_to 'Help', home_help_path %></li>
               <% if current_submitter %>
                 <li><%= link_to 'My Submissions', submissions_show_path %></li>
-              <% elsif (current_editor || current_admin) %>
+              <% elsif ((current_editor && current_editor.approved) || current_admin) %>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Editor Tools <span class="caret"></span></a>
                   </button>

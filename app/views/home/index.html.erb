@@ -13,7 +13,7 @@
 
 <% end %>
 
-<% if current_editor || current_admin %>
+<% if (current_editor && current_editor.approved) || current_admin %>
   <h2>Written Submissions</h2>
   <table class="table table-striped">
   <thead>
@@ -46,4 +46,6 @@
     <% end %>
   </tbody>
 </table>
+<% elsif current_editor && !current_editor.approved %>
+  <h2>Your editor approval is pending.  Please check back soon.</h2>
 <% end %>
