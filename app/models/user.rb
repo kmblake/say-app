@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   # Needs to be half of min PW length
   HEX_LENGTH = 3
 
-  # validates :first_name, :last_name, presence: true 
+  validates :first_name, :last_name, presence: true 
 
   attr_accessor :temp_pw
 

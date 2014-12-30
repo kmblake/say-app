@@ -62,15 +62,14 @@ class UsersController < ApplicationController
   end
 
   def create_submitter
-    @submitter = Submitter.new(submitter_params)
-    @submitter.random_pw
-    if @submitter.save
-      UserMailer.account_for_you(@submitter).deliver
-      flash.notice = "You have successfully added " + @submitter.name + "."
-      redirect_to user_path(@submitter)
+    @user = Submitter.new(submitter_params)
+    @user.random_pw
+    if @user.save
+      UserMailer.account_for_you(@user).deliver
+      flash.notice = "You have successfully added " + @user.name + "."
+      redirect_to user_path(@user)
     else 
-      flash.notice = "Save failed!  Try again."
-      redirect_to :back
+      render :new
     end
   end
 
