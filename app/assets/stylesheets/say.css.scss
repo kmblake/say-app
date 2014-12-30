@@ -23,6 +23,10 @@
   margin: auto;
 }
 
+.left-img {
+  width: 70%;
+}
+
 form.say-form {
   width: 500px;
   margin: auto;
@@ -54,6 +58,17 @@ form.say-form {
   }
 }
 
+.editor-tools {
+  vertical-align: top;
+  width: 25%;
+  display: inline-block;
+  float: right;
+}
+
+#already-read {
+  background-color: #dff0d8;
+}
+
 .stripped {
   list-style-type: none;
   padding: 0;
@@ -62,4 +77,6 @@ form.say-form {
 .top-margin {
   margin-top: 10px
 }
+
+
 

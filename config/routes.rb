@@ -1,9 +1,16 @@
 Rails.application.routes.draw do
+
   get 'submissions/show'
 
-  resources :artworks
+  resources :ratings
+  resources :comments
+  resources :artworks do
+    resources :ratings, :comments
+  end
 
-  resources :documents
+  resources :documents do
+    resources :ratings, :comments
+  end
 
   devise_for :users, :skip => :registrations
   devise_for :submitters, :editors, :skip => :sessions, :controllers => { registrations: 'registrations'}

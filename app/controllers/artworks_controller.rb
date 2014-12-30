@@ -7,10 +7,17 @@ class ArtworksController < ApplicationController
 
   def index
     @artworks = Artwork.all
+    @submitters = User.all
     respond_with(@artworks)
   end
 
   def show
+    if Rating.exists?(:user_id => current_user.id, :artwork_id => @artwork.id)
+      @rating = Rating.find_by_user_id_and_artwork_id(current_user.id, @artwork.id)
+    else
+      @rating = Rating.new
+    end
+    @comment = Comment.new
     respond_with(@artwork)
   end
 

@@ -7,6 +7,9 @@ class User < ActiveRecord::Base
 
   has_many :documents, dependent: :destroy
   has_many :artworks, dependent: :destroy
+  has_many :comments
+  has_many :ratings
+
 
   ROLES = %w[Submitter Editor Admin]
 
