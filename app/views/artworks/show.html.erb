@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <% if current_submitter %>
 	<div class="jumbotron">
 	  <h1 class="center"><%= @artwork.title %></h1>
@@ -41,23 +40,10 @@
 
   		<% end %>
   		<br />
-  		<% @artwork.comments.reverse.each do |comment| %>
+  		<% for comment in @artwork.comments.order("created_at desc") %>
   			<% commenter = User.find(comment.user_id) %>
   			<p><b><%= commenter.first_name %> <%= commenter.last_name %>: </b> <%= comment.comment_text %></p>
   			<br />
   		<% end %>
 	</span>
 <% end %>
-
-=======
-<div class="jumbotron">
-  <h1 class="center"><%= @artwork.title %></h1>
-  <% if current_submitter %><p class="center">If you cannot see your artwork here, unfortunately we won't be able to see it either!</p><% end %>
-</div>
-<div class='center bottom-margin'>
-  <%= link_to 'Edit Title', edit_artwork_path(@artwork), class: 'btn btn-primary form-button' %>
-  <%= link_to 'Done', if current_submitter then submissions_show_path else user_path(@artwork.user) end, class: 'btn btn-success form-button' %>
-  <%= link_to 'Remove Submission', @artwork, method: :delete, class: 'btn btn-danger' %>
-</div>
-<div><%= image_tag @artwork.image.url(:medium), class: 'centered-img' %></div>
->>>>>>> master
