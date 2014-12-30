@@ -8,12 +8,18 @@ class RatingsController < ApplicationController
 			@document = Document.find(params[:document_id])
 			if @rating.save 
 				redirect_to document_path(@document)
+			else
+				@comment = Comment.new
+				render :template => 'documents/show'
 			end
 		elsif !params[:artwork_id].nil?
 			@rating.artwork_id = params[:artwork_id]
 			@artwork = Artwork.find(params[:artwork_id])
 			if @rating.save
 				redirect_to artwork_path(@artwork)
+			else
+				@comment = Comment.new
+				render :template => 'artworks/show'
 			end
 		end
 	end

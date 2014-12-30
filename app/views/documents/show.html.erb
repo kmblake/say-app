@@ -20,6 +20,27 @@
 	<div class="jumbotron">
 	  <h1 class="center"><%= @document.title %> <span class="weak"> (<%= @document.style %>)</span></h1>
 	</div>
+	<% if @rating.errors.any? %>
+		    <div id="error_explanation" class="alert alert-danger">
+		      <h2><%= pluralize(@rating.errors.count, "error") %> prohibited this submission from being saved:</h2>
+
+		      <ul>
+		      <% @rating.errors.full_messages.each do |message| %>
+		        <li><%= message %></li>
+		      <% end %>
+		      </ul>
+		    </div>
+		  <% elsif @comment.errors.any? %>
+		    <div id="error_explanation" class="alert alert-danger">
+		      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this submission from being saved:</h2>
+
+		      <ul>
+		      <% @comment.errors.full_messages.each do |message| %>
+		        <li><%= message %></li>
+		      <% end %>
+		      </ul>
+		    </div>
+		  <% end %>
 	<div>
 		<% doc_viewer_url = 'https://docs.google.com/viewer?url=' + @document.file.url %>
 		<p class="help-block">Preview window not showing up?  Try <%= link_to 'this link', doc_viewer_url, target: "_blank" %>.</p>
@@ -31,6 +52,7 @@
 		</iframe>
 	</span>
 	<span class="editor-tools">
+		
 		<%= form_for ([@document, @rating]) do |f| %>
 	
 			<div class="form-group">

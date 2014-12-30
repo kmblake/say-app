@@ -15,6 +15,27 @@
 	<div class="jumbotron">
 	  <h1 class="center"><%= @artwork.title %></h1>
 	</div>
+	<% if @rating.errors.any? %>
+		    <div id="error_explanation" class="alert alert-danger">
+		      <h2><%= pluralize(@rating.errors.count, "error") %> prohibited this submission from being saved:</h2>
+
+		      <ul>
+		      <% @rating.errors.full_messages.each do |message| %>
+		        <li><%= message %></li>
+		      <% end %>
+		      </ul>
+		    </div>
+		  <% elsif @comment.errors.any? %>
+		    <div id="error_explanation" class="alert alert-danger">
+		      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this submission from being saved:</h2>
+
+		      <ul>
+		      <% @comment.errors.full_messages.each do |message| %>
+		        <li><%= message %></li>
+		      <% end %>
+		      </ul>
+		    </div>
+		  <% end %>
 	<span><%= image_tag @artwork.image.url(:medium), class: 'left-img' %></span>
 	<span class="editor-tools">
 		<%= form_for ([@artwork, @rating]) do |f| %>
