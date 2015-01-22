@@ -1,7 +1,7 @@
 <% if current_submitter %>
 	<div class="jumbotron">
 	  <h1 class="center"><%= @document.title %> <span class="weak"> (<%= @document.style %>)</span></h1>
-	  <p class="center">This is how your submission will appear to the SAY editors.  If you cannot see it here, unfortunately we won't be able to see it either!</p>
+	  <p class="center">This is how your submission will appear to the SAY editors.  If you cannot either (1) see it here or (2) download it using the link below, unfortunately we won't be able to see it either!</p>
 	</div>
 	<div class='center bottom-margin'>
 	  <%= link_to 'Edit Submission Info', edit_document_path(@document), class: 'btn btn-primary form-button' %>
@@ -9,7 +9,7 @@
 	  <%= link_to 'Remove Submission', @document, method: :delete, class: 'btn btn-danger' %>
 	</div>
 	<% doc_viewer_url = 'https://docs.google.com/viewer?url=' + @document.file.url %>
-	<p class="help-block">Preview window not showing up?  Try <%= link_to 'this link', doc_viewer_url, target: "_blank" %>.</p>
+	<p class="help-block">Preview window not showing up?  Try <%= link_to 'downloading the file directly', @document.file.url, target: "_blank" %>.</p>
 	<iframe src="<%= doc_viewer_url %>&embedded=true" 
 	width="100%" height="800" frameborder="0" >
 	<p>Your browser does not support iframes.</p>
@@ -43,7 +43,7 @@
 		  <% end %>
 	<div>
 		<% doc_viewer_url = 'https://docs.google.com/viewer?url=' + @document.file.url %>
-		<p class="help-block">Preview window not showing up?  Try <%= link_to 'this link', doc_viewer_url, target: "_blank" %>.</p>
+		<p class="help-block">Preview window not showing up?  Try <%= link_to 'downloading the file directly', @document.file.url, target: "_blank" %>.</p>
 	</div>
 	<span>
 		<iframe src="<%= doc_viewer_url %>&embedded=true" 
