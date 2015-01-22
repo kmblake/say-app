@@ -37,4 +37,8 @@ class Document < ActiveRecord::Base
     Rating.exists?(:user_id => editor.id, :document_id => id)
   end
 
+  def submitter
+    User.find(user_id)
+  end
+
 end

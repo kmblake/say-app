@@ -1,5 +1,45 @@
+<% if current_editor || current_admin %>
+  <h2>Written Submissions</h2>
+  <%= search_form_for @search do |f| %>
+    <%= f.text_field :title_or_style_or_user_school_or_user_full_name_cont %>
+    <%= button_tag(type: 'submit', class: "btn") do %>
+      <span class="glyphicon glyphicon-search"></span> 
+    <% end %>
+  <% end %>
+  <table class="table table-striped">
+  <thead>
+    <th>#</th>
+    <th><%= sort_link(@search, :title, "Title") %></th>
+    <th><%= sort_link(@search, :style, "Style") %></th>
+    <th><%= sort_link(@search, :user_full_name, "Author") %></th>
+    <th><%= sort_link(@search, :user_school, "School") %></th>
+    <th><%= sort_link(@search, :id, "# of Ratings") %></th>
+    <th><%= sort_link(@search, :avg_rating, "Average Rating") %></th>
+  </thead>
+  <tbody>
+    <% i = 0 %>
+    <% @documents.each do |doc| %>
+      <% if doc.already_rated(current_user) %>
+        <tr id="already-read">
+      <% else %>
+        <tr>
+      <% end %>
+          <td><%= i += 1 %></td>
+          <td><%= link_to doc.title, document_path(doc.id)  %></td>
+          <td><%= doc.style %></td>
+          <td><%= doc.submitter.first_name + ' ' + doc.submitter.last_name %></td>
+          <td><%= doc.submitter.school %></td>
+          <td><%= doc.ratings.count %></td>
+          <td><%= doc.avg_rating %></td>
+        </tr>
+    <% end %>
 
+  </tbody>
 
+</table>
+<% end %>
+
+<!--
   <h2>Written Submissions</h2>
   <table class="table table-striped">
     <thead>
@@ -22,3 +62,5 @@
         </tr>
     <% end %>
   </table>
+
+-->

@@ -6,8 +6,12 @@ class DocumentsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @documents = Document.all
+    @search = Document.search(params[:q])
+    @documents = @search.result.includes(:user)
     respond_with(@documents)
+    
+    
+    
   end
 
   def show
