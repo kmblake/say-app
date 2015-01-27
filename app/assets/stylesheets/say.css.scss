@@ -65,7 +65,7 @@ form.say-form {
   float: right;
 }
 
-#already-read {
+.already-read {
   background-color: #dff0d8;
 }
 
@@ -75,7 +75,11 @@ form.say-form {
 }
 
 .top-margin {
-  margin-top: 10px
+  margin-top: 10px;
+}
+
+.admin-actions {
+  margin-bottom: 15px;
 }
 
 

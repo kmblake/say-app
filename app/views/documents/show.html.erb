@@ -53,6 +53,12 @@
 		</iframe>
 	</span>
 	<span class="editor-tools">
+
+		<%if current_admin then %>
+		<div class="admin-actions center">
+			<%= link_to 'Edit Submission Info', edit_document_path(@document), class: 'btn btn-primary'%>
+		</div>
+		<% end %>
 		
 		<%= form_for ([@document, @rating]) do |f| %>
 	
