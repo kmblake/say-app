@@ -27,4 +27,9 @@ class Artwork < ActiveRecord::Base
   def already_rated(editor)
     Rating.exists?(:user_id => editor.id, :artwork_id => id)
   end
+
+  def update_average
+    average = Rating.where(artwork_id: self.id).average(:rating_val)
+    update_attribute(:average_rating, average)
+  end
 end

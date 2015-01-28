@@ -20,18 +20,18 @@ class Document < ActiveRecord::Base
   MAX_DOCUMENTS = 3
   RATINGS = [1, 2, 3, 4]
 
-  def avg_rating
-    total = 0
-    for rating in ratings
-      total += rating.rating_val
-    end
-    avg = total.to_f / ratings.count
-    if avg.nan?
-      return 0.0
-    else 
-      return avg
-    end
-  end
+  # def avg_rating
+  #   total = 0
+  #   for rating in ratings
+  #     total += rating.rating_val
+  #   end
+  #   avg = total.to_f / ratings.count
+  #   if avg.nan?
+  #     return 0.0
+  #   else 
+  #     return avg
+  #   end
+  # end
 
   def already_rated(editor)
     Rating.exists?(:user_id => editor.id, :document_id => id)
@@ -39,6 +39,11 @@ class Document < ActiveRecord::Base
 
   def submitter
     User.find(user_id)
+  end
+
+  def update_average
+    average = Rating.where(document_id: self.id).average(:rating_val)
+    update_attribute(:average_rating, average)
   end
 
 end

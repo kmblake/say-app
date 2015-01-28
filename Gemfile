@@ -68,3 +68,7 @@ gem 'select2-rails', '~> 3.5.9.1'
 
 # searching and sorting submissions
 gem 'ransack'
+
+#pagination
+gem 'will_paginate-bootstrap'
+gem 'will_paginate', '~> 3.0.6'

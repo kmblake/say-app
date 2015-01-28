@@ -1,11 +1,15 @@
 <% if current_editor || current_admin %>
   <h2>Written Submissions</h2>
-  <%= search_form_for @search do |f| %>
-    <%= f.text_field :title_or_style_or_user_school_or_user_full_name_cont %>
-    <%= button_tag(type: 'submit', class: "btn") do %>
-      <span class="glyphicon glyphicon-search"></span> 
+  <div class="search">
+    <%= search_form_for @search, html: {class: "form-inline"} do |f| %>
+      <div class="form-group">
+        <%= f.text_field :title_or_style_or_user_school_or_user_full_name_cont, placeholder: "Search...", class: "form-control", style: "width: 500px" %>
+        <%= button_tag(type: 'submit', class: "btn") do %>
+          <span class="glyphicon glyphicon-search"></span> 
+        <% end %>
+      </div>
     <% end %>
-  <% end %>
+  </div>
   <table class="table table-striped">
   <thead>
     <th>#</th>
@@ -13,8 +17,8 @@
     <th><%= sort_link(@search, :style, "Style") %></th>
     <th><%= sort_link(@search, :user_full_name, "Author") %></th>
     <th><%= sort_link(@search, :user_school, "School") %></th>
-    <th><%= sort_link(@search, :id, "# of Ratings") %></th>
-    <th><%= sort_link(@search, :avg_rating, "Average Rating") %></th>
+    <th><%= sort_link(@search, :ratings_count, "# of Ratings") %></th>
+    <th><%= sort_link(@search, :average_rating, "Average Rating") %></th>
   </thead>
   <tbody>
     <% i = 0 %>
@@ -29,14 +33,16 @@
           <td><%= doc.style %></td>
           <td><%= doc.submitter.first_name + ' ' + doc.submitter.last_name %></td>
           <td><%= doc.submitter.school %></td>
-          <td><%= doc.ratings.count %></td>
-          <td><%= doc.avg_rating %></td>
+          <td><%= doc.ratings_count %></td>
+          <td><%= doc.average_rating ? doc.average_rating.round(2) : "n/a"  %></td>
         </tr>
     <% end %>
 
   </tbody>
 
 </table>
+
+<%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
 <% end %>
 
 <!--
