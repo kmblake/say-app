@@ -1,5 +1,5 @@
 <% if current_editor || current_admin %>
-  <h2>Written Submissions (<%= Document.count %> total)</h2>
+  <h2>Written Submissions (<%= @documents.count %>)</h2>
   <div class="search">
     <%= search_form_for @search, html: {class: "form-inline"} do |f| %>
       <div class="form-group">

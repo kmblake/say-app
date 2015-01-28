@@ -1,6 +1,6 @@
 <% if current_editor || current_admin %>
 
-<h1>Art Submissions (<%= Artwork.count %> total)</h1>
+<h1>Art Submissions (<%= @artworks.count %>)</h1>
 <div class="search">
   <%= search_form_for @search, html: {class: "form-inline"} do |f| %>
     <div class="form-group">
