@@ -43,4 +43,10 @@ class User < ActiveRecord::Base
     self.temp_pw = pw
   end
 
+  ransacker :full_name do |parent|
+    Arel::Nodes::InfixOperation.new('||',
+      Arel::Nodes::InfixOperation.new('||', parent.table[:first_name], ' '),
+      parent.table[:last_name])
+  end
+
 end

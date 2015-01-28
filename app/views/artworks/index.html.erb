@@ -1,36 +1,41 @@
 <% if current_editor || current_admin %>
 
-<h1>Art Submissions</h1>
-
+<h1>Art Submissions (<%= @artworks.count %>)</h1>
+<div class="search">
+  <%= search_form_for @search, html: {class: "form-inline"} do |f| %>
+    <div class="form-group">
+      <%= f.text_field :title_or_user_school_or_user_full_name_cont, placeholder: "Search...", class: "form-control", style: "width: 500px" %>
+      <%= button_tag(type: 'submit', class: "btn") do %>
+        <span class="glyphicon glyphicon-search"></span> 
+      <% end %>
+    </div>
+  <% end %>
+</div>
 <table class="table table-striped">
-    <thead>
-      <th>#</th>
-      <th>Title</th>
-      <th>Thumbnail</th>
-      <th>Author</th>
-      <th>School</th>
-      <th># of Ratings</th>
-      <th>Average Rating</th>
-    </thead>
+  <thead>
+    <th><%= sort_link(@search, :title, "Title") %></th>
+    <th>Thumbnail</th>
+    <th><%= sort_link(@search, :user_full_name, "Author") %></th>
+    <th><%= sort_link(@search, :user_school, "School") %></th>
+    <th><%= sort_link(@search, :ratings_count, "# of Ratings") %></th>
+    <th><%= sort_link(@search, :average_rating, "Average Rating") %></th>
+  </thead>
     <tbody>
-    <% i = 0 %>
-    <% @submitters.each do |submitter| %>
-      <% submitter.artworks.each do |art| %>
+    <% @artworks.each do |art| %>
         <% if art.already_rated(current_user) %>
           <tr id="already-read">
         <% else %>
           <tr>
         <% end %>
-            <td><%= i += 1 %></td>
             <td><%= link_to art.title, artwork_path(art.id)  %></td>
             <td><%= image_tag art.image.url(:thumb) %></td>
-            <td><%= submitter.first_name + ' ' + submitter.last_name %></td>
-            <td><%= submitter.school %></td>
-            <td><%= art.ratings.count %></td>
-            <td><%= art.avg_rating %></td>
+            <td><%= art.user.name %></td>
+            <td><%= art.user.school %></td>
+            <td><%= art.ratings_count %></td>
+            <td><%= art.average_rating ? art.average_rating.round(2) : "n/a" %></td>
           </tr>
       <% end %>
-    <% end %>
   </tbody>
   </table>
+  <%= will_paginate @artworks, renderer: BootstrapPagination::Rails %>
   <% end %>

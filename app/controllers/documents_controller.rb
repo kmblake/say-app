@@ -6,8 +6,11 @@ class DocumentsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @documents = Document.all
+    @search = Document.search(params[:q])
+    @search.sorts = 'ratings_count asc' if @search.sorts.empty?
+    @documents = @search.result.paginate(:page => params[:page], :per_page => 30)
     respond_with(@documents)
+    
   end
 
   def show
