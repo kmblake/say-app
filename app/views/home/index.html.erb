@@ -37,7 +37,7 @@
   <tbody>
     <% @documents.each do |doc| %>
       <% if doc.already_rated(current_user) %>
-        <tr id="already-read">
+        <tr class="already-read">
       <% else %>
         <tr>
       <% end %>

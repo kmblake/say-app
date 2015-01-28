@@ -12,10 +12,14 @@
   
 <%= form_for @document, :html => { :multipart => true, class: 'say-form'  } do |f| %>
   <% if current_admin %>
-    <div class="form-group">
-      <%= f.label :user_id, "Submitter" %><br>
-      <%= f.select(:user_id, options_from_collection_for_select(Submitter.all, 'id', 'name', params[:user_id]), {}, {id: 'user-select', class: 'form-control'}) %>
-    </div>
+      <div class="form-group">
+        <% if @document.user %>
+          <strong>Submitter:</strong> <%= @document.user.name %><br/>
+        <% else %>
+          <%= f.label :user_id, "Submitter" %><br>
+          <%= f.select(:user_id, options_from_collection_for_select(Submitter.all, 'id', 'name', params[:user_id]), {}, {id: 'user-select', class: 'form-control'}) %>
+        <% end %>
+      </div>
   <% else %>
     <%= f.hidden_field :user_id, value: current_user.id %>
   <% end %>
