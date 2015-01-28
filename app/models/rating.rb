@@ -4,8 +4,10 @@ class Rating < ActiveRecord::Base
 	belongs_to :artwork, counter_cache: true
 	validates :rating_val, presence: true
 
+  after_commit :update_rating_avg
+
   private 
-  def update_average
+  def update_rating_avg
     if self.document
       self.document.update_average
     else

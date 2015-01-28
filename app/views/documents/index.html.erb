@@ -1,5 +1,5 @@
 <% if current_editor || current_admin %>
-  <h2>Written Submissions</h2>
+  <h2>Written Submissions (<%= Document.count %> total)</h2>
   <div class="search">
     <%= search_form_for @search, html: {class: "form-inline"} do |f| %>
       <div class="form-group">
@@ -12,7 +12,6 @@
   </div>
   <table class="table table-striped">
   <thead>
-    <th>#</th>
     <th><%= sort_link(@search, :title, "Title") %></th>
     <th><%= sort_link(@search, :style, "Style") %></th>
     <th><%= sort_link(@search, :user_full_name, "Author") %></th>
@@ -21,14 +20,12 @@
     <th><%= sort_link(@search, :average_rating, "Average Rating") %></th>
   </thead>
   <tbody>
-    <% i = 0 %>
     <% @documents.each do |doc| %>
       <% if doc.already_rated(current_user) %>
         <tr id="already-read">
       <% else %>
         <tr>
       <% end %>
-          <td><%= i += 1 %></td>
           <td><%= link_to doc.title, document_path(doc.id)  %></td>
           <td><%= doc.style %></td>
           <td><%= doc.submitter.first_name + ' ' + doc.submitter.last_name %></td>
@@ -42,7 +39,7 @@
 
 </table>
 
-<%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
+<%= will_paginate @documents, renderer: BootstrapPagination::Rails %>
 <% end %>
 
 <!--

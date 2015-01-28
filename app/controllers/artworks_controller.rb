@@ -6,8 +6,10 @@ class ArtworksController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @artworks = Artwork.all
     @submitters = User.all
+    @search = Artwork.search(params[:q])
+    @search.sorts = 'ratings_count asc' if @search.sorts.empty?
+    @artworks = @search.result.paginate(:page => params[:page], :per_page => 30)
     respond_with(@artworks)
   end
 
