@@ -1,7 +1,7 @@
 class Artwork < ActiveRecord::Base
   belongs_to :user
-  has_many :comments
-  has_many :ratings
+  has_many :comments, dependent: :destroy
+  has_many :ratings, dependent: :destroy
   has_attached_file :image, :styles => {:medium => "800x800>", :thumb => "100x100>" }
 
   validates_attachment_presence :image

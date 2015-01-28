@@ -1,7 +1,7 @@
 class Document < ActiveRecord::Base
   belongs_to :user
-  has_many :comments
-  has_many :ratings
+  has_many :comments, dependent: :destroy
+  has_many :ratings, dependent: :destroy
   has_attached_file :file
 
   validates :title, :user_id, presence: true
