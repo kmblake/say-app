@@ -1,4 +1,4 @@
-$ ->
+ready = -> 
   $("a[data-remote]").on "ajax:success", (e, data, status, xhr) ->
     onButtonLoad(data)
 
@@ -9,4 +9,5 @@ onButtonLoad = (accepted) ->
   else
     $("#accept-button").html("Accept")
   
-
+$(document).ready(ready)
+$(document).on('page:load', ready)

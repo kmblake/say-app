@@ -18,6 +18,7 @@
     <th><%= sort_link(@search, :user_school, "School") %></th>
     <th><%= sort_link(@search, :ratings_count, "# of Ratings") %></th>
     <th><%= sort_link(@search, :average_rating, "Average Rating") %></th>
+    <th><%= sort_link(@search, :accepted, [:accepted, 'average_rating desc'], "Accepted") %></th>
   </thead>
   <tbody>
     <% @documents.each do |doc| %>
@@ -32,6 +33,7 @@
           <td><%= doc.submitter.school %></td>
           <td><%= doc.ratings_count %></td>
           <td><%= doc.average_rating ? doc.average_rating.round(2) : "n/a"  %></td>
+          <td><%= if doc.accepted then "Y" else "N" end %></td>
         </tr>
     <% end %>
 

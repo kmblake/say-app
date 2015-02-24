@@ -56,7 +56,7 @@
 
 		<%if current_admin then %>
 			<div id="approved-button" class="admin-actions center">
-				<% button_action = @document.accepted ? "Reject" : "Approve" %>
+				<% button_action = @document.accepted ? "Reject" : "Accept" %>
 				<% button_classes = @document.accepted ? "btn btn-danger" : "btn btn-success" %>
 	      <%= link_to button_action, toggle_approved_document_path(@document), remote: true, method: :post, class: button_classes, id: "accept-button" %>
 			</div>
