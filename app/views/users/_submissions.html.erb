@@ -16,7 +16,7 @@
             <td><%= link_to doc.title, document_path(doc.id)  %></td>
             <td><%= doc.style %></td>
             <td><%= doc.created_at.strftime("%m/%d/%Y at %I:%M %p") %></td>
-            <td><%= doc.status %></td>
+            <td><%= if current_submitter && !Settings.finalized then "Under Review!" else doc.status end %></td>
             <td><%= link_to 'Remove', doc, method: :delete %>
           </tr>
         <% end %>
