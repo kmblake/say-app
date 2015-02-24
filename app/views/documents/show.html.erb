@@ -55,10 +55,16 @@
 	<span class="editor-tools">
 
 		<%if current_admin then %>
-		<div class="admin-actions center">
-			<%= link_to 'Edit Submission Info', edit_document_path(@document), class: 'btn btn-primary'%>
-		</div>
+			<div id="approved-button" class="admin-actions center">
+				<% button_action = @document.accepted ? "Reject" : "Approve" %>
+				<% button_classes = @document.accepted ? "btn btn-danger" : "btn btn-success" %>
+	      <%= link_to button_action, toggle_approved_document_path(@document), remote: true, method: :post, class: button_classes, id: "accept-button" %>
+			</div>
+			<div class="admin-actions center">
+				<%= link_to 'Edit Submission Info', edit_document_path(@document), class: 'btn btn-primary'%>
+			</div>
 		<% end %>
+		
 		
 		<%= form_for ([@document, @rating]) do |f| %>
 	
