@@ -32,8 +32,13 @@ class Ability
     user ||= Submitter.new # guest user (not logged in)
 
     if user.role == "Submitter"
-        can :manage, Document
-        can :manage, Artwork
+        if Settings.accepting_submissions
+            can :manage, Document
+            can :manage, Artwork
+        else
+            can :read, Document
+            can :read, Artwork
+        end
         can [:create, :read, :destroy], Submitter
     end
 

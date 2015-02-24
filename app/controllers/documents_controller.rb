@@ -1,5 +1,5 @@
 class DocumentsController < ApplicationController
-  before_action :set_document, only: [:show, :edit, :update, :destroy]
+  before_action :set_document, only: [:show, :edit, :update, :destroy, :toggle_approved]
 
   respond_to :html
 
@@ -57,6 +57,12 @@ class DocumentsController < ApplicationController
     else 
       redirect_to user_path(submitter)
     end
+  end
+
+  def toggle_approved
+    @document.toggle :accepted
+    @document.save
+    render json: @document.accepted
   end
 
   private

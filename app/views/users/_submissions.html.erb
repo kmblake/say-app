@@ -16,7 +16,7 @@
             <td><%= link_to doc.title, document_path(doc.id)  %></td>
             <td><%= doc.style %></td>
             <td><%= doc.created_at.strftime("%m/%d/%Y at %I:%M %p") %></td>
-            <td><%= doc.status %></td>
+            <td><%= if current_submitter && !Settings.finalized then "Under Review" else doc.status end %></td>
             <td><%= link_to 'Remove', doc, method: :delete %>
           </tr>
         <% end %>
@@ -43,7 +43,7 @@
             <td><%= link_to art.title, artwork_path(art.id)  %></td>
             <td><%= image_tag art.image.url(:thumb) %></td>
             <td><%= art.created_at.strftime("%m/%d/%Y at %I:%M %p") %></td>
-            <td><%= art.status %></td>
+            <td><%= if current_submitter && !Settings.finalized then "Under Review" else art.status end %></td>
             <td><%= link_to 'Remove', art, method: :delete %></td>
           </tr>
         <% end %>

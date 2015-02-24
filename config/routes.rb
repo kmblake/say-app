@@ -51,6 +51,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :documents do
+    member do 
+      post 'toggle_approved'
+    end
+  end
+
 
   # devise_for :users, :controllers => { registrations: 'registrations' }
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150127182444) do
+ActiveRecord::Schema.define(version: 20150224131101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,17 @@ ActiveRecord::Schema.define(version: 20150127182444) do
     t.integer "user_id"
     t.integer "artwork_id"
   end
+
+  create_table "settings", force: true do |t|
+    t.string   "var",                   null: false
+    t.text     "value"
+    t.integer  "thing_id"
+    t.string   "thing_type", limit: 30
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "settings", ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",    null: false
