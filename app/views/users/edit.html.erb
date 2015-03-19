@@ -47,7 +47,7 @@
 
   <div class="form-group">
     <%= f.label :school %><br />
-    <%= f.select :school, Submitter::SCHOOLS, {prompt: "Select your school..."}, class: "form-control", id: "school-select" %>
+    <%= f.select :school, Settings.schools, {prompt: "Select your school..."}, class: "form-control", id: "school-select" %>
   </div>
 
   <div class="form-group">
