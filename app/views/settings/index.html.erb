@@ -1,0 +1,9 @@
+<%= form_for @settings, class: "form-horizontal" do |f| %>
+  <div class="form-group">
+    <%= f.label :accepting_submissions, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.checkbox :accepting_submissions %>
+      <p class="form-control-static">email@example.com</p>
+    </div>
+  </div>
+<% end %>

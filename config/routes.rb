@@ -57,6 +57,9 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :settings, only: [:index, :edit] do
+  end
+
 
   # devise_for :users, :controllers => { registrations: 'registrations' }
 

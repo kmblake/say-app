@@ -47,6 +47,7 @@ gem 'devise'
 
 # Bootstrap
 gem 'bootstrap-sass', '~> 3.3.1'
+gem "bootstrap-switch-rails"
 
 # Paperclip for file upload
 gem 'paperclip', github: 'thoughtbot/paperclip'
