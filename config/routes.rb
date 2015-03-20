@@ -57,7 +57,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :settings, only: [:index, :edit] do
+  resources :settings, only: [:index, :edit, :update] do
   end
 
 

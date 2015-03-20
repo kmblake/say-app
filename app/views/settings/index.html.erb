@@ -1,8 +1,9 @@
-<%= form_tag 'settings/' + Settings.find_by_var("accepting_submissions").id.to_s, remote: true, class: "form-horizontal" do |f| %>
+<div class="info"></div>
+<%= form_tag 'settings/' + Settings.find_by_var("accepting_submissions").id.to_s, method: :put, remote: true, class: "form-horizontal", id: "submissions_switch" do |f| %>
   <div class="form-group">
     <%= label_tag 'accepting_submissions', 'Accepting Submissions', class: "col-sm-2 control-label" %>
     <div class="col-sm-10 checkbox">
-      <%= check_box_tag 'accepting_submissions', 'accepting_submissions', Settings.accecpting_submissions, class: 'form-control' %>
+      <%= check_box_tag 'accepting_submissions', 'true', Settings.accepting_submissions, class: 'form-control' %>
     </div>
   </div>
 <% end %>

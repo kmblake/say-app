@@ -7,4 +7,12 @@ class SettingsController < ApplicationController
   def edit
     @setting = Settings.unscoped.find(params[:id])
   end
+
+  def update
+    @setting = Settings.unscoped.find(params[:id])
+    if @setting.var = "accepting_submissions"
+      if params[:accepting_submissions] then Settings.accepting_submissions = true else Settings.accepting_submissions = false end
+    end
+    render json: Settings.accepting_submissions
+  end
 end
