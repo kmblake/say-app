@@ -1,9 +1,12 @@
-<%= form_for @settings, class: "form-horizontal" do |f| %>
+<%= form_tag 'settings/' + Settings.find_by_var("accepting_submissions").id.to_s, remote: true, class: "form-horizontal" do |f| %>
   <div class="form-group">
-    <%= f.label :accepting_submissions, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.checkbox :accepting_submissions %>
-      <p class="form-control-static">email@example.com</p>
+    <%= label_tag 'accepting_submissions', 'Accepting Submissions', class: "col-sm-2 control-label" %>
+    <div class="col-sm-10 checkbox">
+      <%= check_box_tag 'accepting_submissions', 'accepting_submissions', Settings.accecpting_submissions, class: 'form-control' %>
     </div>
   </div>
 <% end %>
+
+<script>
+$("[name='accepting_submissions']").bootstrapSwitch()
+</script>
