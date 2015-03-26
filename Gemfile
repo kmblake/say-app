@@ -76,3 +76,6 @@ gem 'will_paginate', '~> 3.0.6'
 
 #App settings
 gem "rails-settings-cached", "0.4.1"
+
+#Zip files
+gem 'rubyzip'
