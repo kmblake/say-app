@@ -21,10 +21,17 @@
   </div>
 <% end %>
 
-<%= link_to 'Download Accepted Submissions', download_documents_path, class: 'btn btn-lg btn-primary' %>
+<%= link_to 'Download Accepted Submissions', download_documents_path, data: {:'loading-text' => "Loading..."}, class: 'btn btn-lg btn-primary', id: 'loading-btn'  %>
 
 <script>
 $("[name='accepting_submissions']").bootstrapSwitch()
 $("[name='finalized']").bootstrapSwitch()
 $('[data-toggle="tooltip"]').tooltip()
+
+// $('#loading-btn').on('click', function () {
+//   alert("Clicked")
+//   $(this).button('loading')
+//   // business logic...
+//   $btn.button('reset')
+// })
 </script>
