@@ -1,9 +1,10 @@
 class DocumentsController < ApplicationController
-  before_action :set_document, only: [:show, :edit, :update, :destroy, :toggle_approved]
+  # before_action :set_document, only: [:show, :edit, :update, :destroy, :toggle_approved]
 
   respond_to :html
 
-  load_and_authorize_resource
+  # load_and_authorize_resource
+  skip_authorize_resource only: :download
 
   def index
     @search = Document.search(params[:q])
@@ -63,6 +64,32 @@ class DocumentsController < ApplicationController
     @document.toggle :accepted
     @document.save
     render json: @document.accepted
+  end
+
+  def download
+    require 'rubygems'
+    require 'zip'
+    accepted = Document.where(accepted: true)
+    file = Tempfile.new("submissions-temp-#{Time.now}")
+    begin 
+      Zip::File.open(file.path, Zip::File::CREATE) do |zipfile|
+        accepted.each do |doc|
+          # Two arguments:
+          # - The name of the file as it will appear in the archive
+          # - The original file, including the path to find it
+          filename = doc.title.squish.downcase.tr(" ","_")  << '_' << doc.file.original_filename
+          # filename = doc.title.squish.downcase.tr(" ","_")
+          t = Tempfile.new("doc")
+          doc.file.copy_to_local_file(:original, t.path)
+          # zipfile.add(doc.title.squish.downcase.tr(" ","_"), t.path)
+          zipfile.add(filename, t.path)
+          t.close
+        end
+      end
+      send_file file.path, :type => 'application/zip', :disposition => 'attachment', :filename => "submissions.zip"
+    ensure
+      file.close
+    end
   end
 
   private

@@ -21,6 +21,8 @@
   </div>
 <% end %>
 
+<%= link_to 'Download Accepted Submissions', download_documents_path, data: {:'loading-text' => "Loading..."}, class: 'btn btn-lg btn-primary', id: 'loading-btn'  %>
+
 <script>
 $("[name='accepting_submissions']").bootstrapSwitch()
 $("[name='finalized']").bootstrapSwitch()

@@ -10,6 +10,13 @@ Rails.application.routes.draw do
 
   resources :documents do
     resources :ratings, :comments
+    member do 
+      post 'toggle_approved'
+    end
+    collection do 
+      get 'download'
+      get 'test'
+    end
   end
 
   devise_for :users, :skip => :registrations
@@ -48,12 +55,6 @@ Rails.application.routes.draw do
       get 'admin_tools'
       get 'new_submitter'
       post 'create_submitter'
-    end
-  end
-
-  resources :documents do
-    member do 
-      post 'toggle_approved'
     end
   end
 
