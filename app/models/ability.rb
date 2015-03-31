@@ -52,7 +52,6 @@ class Ability
         can :manage, Document
         can :manage, Artwork
         can :manage, User
-        can [:read, :update]
     end
   end
 end
