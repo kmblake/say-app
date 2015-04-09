@@ -2,7 +2,6 @@ class SettingsController < ApplicationController
 
   def index
     # to get all items for render list
-    unless current_admin then raise(CanCan::AccessDenied, 'You are not authorized to access this page.') end
     @settings = Settings.unscoped
   end
 
