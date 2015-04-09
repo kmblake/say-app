@@ -1,9 +1,9 @@
 class DocumentsController < ApplicationController
-  # before_action :set_document, only: [:show, :edit, :update, :destroy, :toggle_approved]
+  before_action :set_document, only: [:show, :edit, :update, :destroy, :toggle_approved]
 
   respond_to :html
 
-  # load_and_authorize_resource
+  load_and_authorize_resource
   skip_authorize_resource only: :download
 
   def index
