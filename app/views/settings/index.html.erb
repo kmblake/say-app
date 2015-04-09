@@ -1,0 +1,30 @@
+<div class="info"></div>
+<%= form_tag 'settings/' + Settings.find_by_var("accepting_submissions").id.to_s, method: :put, remote: true, class: "form-horizontal", id: "submissions_switch" do |f| %>
+  <div class="form-group">
+    <div class="col-sm-3">
+      <h2 class="h4"><span class="glyphicon glyphicon-question-sign" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="When this is disabled, only admins can upload submissions."> </span>  Accepting Submissions</h2>
+    </div> 
+    <div class="col-sm-9">
+      <%= check_box_tag 'accepting_submissions', 'true', Settings.accepting_submissions, class: 'form-control' %>
+    </div>
+  </div>
+<% end %>
+
+<%= form_tag 'settings/' + Settings.find_by_var("finalized").id.to_s, method: :put, remote: true, class: "form-horizontal", id: "finalized_switch" do |f| %>
+  <div class="form-group">
+    <div class="col-sm-3">
+      <h2 class="h4"><span class="glyphicon glyphicon-question-sign" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Finalizing enables submitters to see whether or not their submissions were accepted on the My Submissions page."> </span>  Finalized</h2>
+    </div> 
+    <div class="col-sm-9">
+      <%= check_box_tag 'finalized', 'true', Settings.finalized, class: 'form-control' %>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to 'Download Accepted Submissions', download_documents_path, data: {:'loading-text' => "Loading..."}, class: 'btn btn-lg btn-primary', id: 'loading-btn'  %>
+
+<script>
+$("[name='accepting_submissions']").bootstrapSwitch()
+$("[name='finalized']").bootstrapSwitch()
+$('[data-toggle="tooltip"]').tooltip()
+</script>
