@@ -76,8 +76,23 @@
     			<%= f.submit "Save Rating", class: "btn btn-success" %>
   			</div>
   		<% end %>
-		<br />
-  		
+  		<br />
+
+  		<% if @document.ratings.count > 0 %>
+  		<div class="panel panel-default">
+  		  <div class="panel-heading">
+  		    <h3 class="panel-title">Average Rating: <%= @document.average_rating.round(2) %></h3>
+  		  </div>
+  		  <div class="panel-body">
+  		    <% for rating in @document.ratings %>
+	  			<% rater = User.find(rating.user_id) %>
+	  			<b><%= rater.first_name %> <%= rater.last_name %>: </b> <%= rating.rating_val %>
+	  			<br />
+	  		<% end %>
+  		  </div>
+  		</div>
+  		<% end %>
+
   		<%= form_for ([@document, @comment]) do |f| %>
 	
 			<div class="form-group">
