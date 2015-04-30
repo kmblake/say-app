@@ -70,7 +70,7 @@ class DocumentsController < ApplicationController
     require 'zip'
     file = Tempfile.new("submissions-temp-#{Time.now}")
     accepted = Document.where(accepted: true)
-
+    puts "ORIGINAL FILE!!!!!!!!!: " + file.path
     Zip::File.open(file.path, Zip::File::CREATE) do |zipfile|
       accepted.each do |doc|
         # Two arguments:
@@ -78,14 +78,17 @@ class DocumentsController < ApplicationController
         # - The original file, including the path to find it
         filename = doc.title.squish.downcase.tr(" ","_")  <<  doc.file.original_filename
         t = Tempfile.new("doc")
+        puts "DOCFILE!!!!!!!!!: " + t.path
         doc.file.copy_to_local_file(:original, t.path)
         # zipfile.add(doc.title.squish.downcase.tr(" ","_"), t.path)
         zipfile.add(filename, t.path)
+        puts "DOCFILE!!!!!!!!!: " + t.path
         t.close
       end
     end
+    puts "ready to send file!!!"
     send_file file.path, :type => 'application/zip', :disposition => 'attachment', :filename => "submissions.zip"
-    file.close
+    file.close!
   end
 
   private
