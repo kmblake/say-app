@@ -21,8 +21,13 @@
   </div>
 <% end %>
 
+<div class="form-group">
 <%= link_to 'Download Accepted Submissions', download_documents_path, data: {:'loading-text' => "Loading..."}, class: 'btn btn-lg btn-primary', id: 'loading-btn'  %>
+</div>
 
+<div class="form-group">
+<%= link_to 'Download Accepted Submitter Data', export_to_csv_settings_path, data: {:'loading-text' => "Loading..."}, class: 'btn btn-lg btn-primary'  %>
+</div>
 <script>
 $("[name='accepting_submissions']").bootstrapSwitch()
 $("[name='finalized']").bootstrapSwitch()

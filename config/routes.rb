@@ -59,6 +59,9 @@ Rails.application.routes.draw do
   end
 
   resources :settings, only: [:index, :edit, :update] do
+    collection do
+      get 'export_to_csv'
+    end
   end
 
 
