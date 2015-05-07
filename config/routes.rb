@@ -8,6 +8,9 @@ Rails.application.routes.draw do
     member do 
       post 'toggle_approved'
     end
+    collection do 
+      get 'download'
+    end
     resources :ratings, :comments
   end
 

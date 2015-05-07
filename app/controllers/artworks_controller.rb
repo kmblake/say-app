@@ -64,6 +64,33 @@ class ArtworksController < ApplicationController
     render json: @artwork.accepted
   end
 
+  def download
+    require 'rubygems'
+    require 'zip'
+    begin 
+      file = Tempfile.new("submissions-temp-#{Time.now}")
+      accepted = Artwork.where(accepted: true)
+      tempfiles = Array.new()
+      Zip::File.open(file.path, Zip::File::CREATE) do |zipfile|
+        accepted.each do |art|
+          filename = art.title.squish.downcase.tr(" ","_")  <<  art.image.original_filename
+          t = Tempfile.new("art")
+          puts "Artfile: " + t.path
+          puts "Zipfile: " + file.path
+          art.image.copy_to_local_file(:original, t.path)
+          zipfile.add(filename, t.path)
+          tempfiles << t
+        end
+      end
+      send_file file.path, :type => 'application/zip', :disposition => 'attachment', :filename => "artwork.zip"
+    ensure
+      file.try(:close!)
+      for t in tempfiles
+        t.try(:close!)
+      end
+    end
+  end
+
   private
     def set_artwork
       @artwork = Artwork.find(params[:id])
