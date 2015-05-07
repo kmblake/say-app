@@ -38,6 +38,17 @@
 		  <% end %>
 	<span><%= image_tag @artwork.image.url(:medium), class: 'left-img' %></span>
 	<span class="editor-tools">
+    <%if current_admin then %>
+      <div id="approved-button" class="admin-actions center">
+        <% button_action = @artwork.accepted ? "Reject" : "Accept" %>
+        <% button_classes = @artwork.accepted ? "btn btn-danger" : "btn btn-success" %>
+        <%= link_to button_action, toggle_approved_artwork_path(@artwork), remote: true, method: :post, class: button_classes, id: "accept-button" %>
+      </div>
+      <div class="admin-actions center">
+        <%= link_to 'Edit Submission Info', edit_artwork_path(@artwork), class: 'btn btn-primary'%>
+      </div>
+    <% end %>
+
 		<%= form_for ([@artwork, @rating]) do |f| %>
 	
 			<div class="form-group">
