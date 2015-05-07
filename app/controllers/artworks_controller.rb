@@ -58,6 +58,12 @@ class ArtworksController < ApplicationController
     end
   end
 
+  def toggle_approved
+    @artwork.toggle :accepted
+    @artwork.save
+    render json: @artwork.accepted
+  end
+
   private
     def set_artwork
       @artwork = Artwork.find(params[:id])

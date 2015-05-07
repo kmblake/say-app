@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   resources :ratings
   resources :comments
   resources :artworks do
+    member do 
+      post 'toggle_approved'
+    end
     resources :ratings, :comments
   end
 
