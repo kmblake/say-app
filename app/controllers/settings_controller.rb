@@ -24,7 +24,7 @@ class SettingsController < ApplicationController
     @accepted_users_docs = Submitter.joins(:documents).where("accepted = true").select("first_name", "last_name", "bio", "school", "teacher", "email", "documents.title", "documents.style")
     @accepted_users_art = Submitter.joins(:artworks).where("accepted = true").select("first_name", "last_name", "bio", "school", "teacher", "email", "artworks.title")
     csv_string = CSV.generate do |csv|
-       csv << ["First Name", "Last Name", "Bio", "School", "Teacher", "Type", "Title"]
+       csv << ["First Name", "Last Name", "Email", "Bio", "School", "Teacher", "Type", "Title"]
        @accepted_users_docs.each do |user|
          csv << [user.first_name, user.last_name, user.email, user.bio, user.school, user.teacher, user.style, user.title]
        end
