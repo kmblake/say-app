@@ -65,7 +65,7 @@ form.say-form {
   float: right;
 }
 
-.already-read {
+.table > tbody > tr.already-read > td {
   background-color: #dff0d8;
 }
 
