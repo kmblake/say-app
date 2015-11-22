@@ -1,7 +1,7 @@
 <% if @document.file_content_type == "application/pdf" %>
     <% doc_viewer_url = 'https://docs.google.com/viewer?url=' + @document.file.url %>
   <% else %>
-    <% doc_viewer_url = 'http://view.officeapps.live.com/op/view.aspx?src=' + @document.file.url %>
+    <% doc_viewer_url = 'https://view.officeapps.live.com/op/view.aspx?src=' + @document.file.url %>
   <% end %>
 <% if current_submitter %>
 	<div class="jumbotron">
