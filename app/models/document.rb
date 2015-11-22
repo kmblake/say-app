@@ -6,18 +6,17 @@ class Document < ActiveRecord::Base
 
   validates :title, :user_id, presence: true
   
-  # disallows multiple submissions of a single style
-  validates :style, style: true
+  # To disallow multiple submissions of a single style, uncomment the next line
+  # validates :style, style: true
 
   validates_attachment_presence :file
   validates_attachment_content_type :file, :content_type => ["application/pdf",
              "application/msword", 
-             "application/vnd.openxmlformats-officedocument.wordprocessingml.document", 
-             "text/plain"]
+             "application/vnd.openxmlformats-officedocument.wordprocessingml.document"]
 
   STYLES = %w[Fiction Nonfiction Poetry]
   STATUS = {under_review: 'Under Review', accepted: 'Accepted', rejected: 'Not Accepted'}
-  MAX_DOCUMENTS = 3
+  MAX_DOCUMENTS = 2
   RATINGS = [1, 2, 3, 4]
 
   # def avg_rating
