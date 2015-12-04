@@ -1,5 +1,7 @@
 <div class="jumbotron">
   <h1>My Submissions</h1>
+  <p><%= @user.bio %><br><%= if current_submitter then link_to('Edit Bio', send("edit_submitter_registration_path", @user)) end %></p>
+
 </div>
 
 <%= render 'users/submissions' %>
