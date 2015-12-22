@@ -15,8 +15,10 @@ class SettingsController < ApplicationController
       if params[:accepting_submissions] then Settings.accepting_submissions = true else Settings.accepting_submissions = false end
       elsif @setting.var == "finalized"
         if params[:finalized] then Settings.finalized = true else Settings.finalized = false end
-        end
-        render json: @setting
+      elsif @setting.var == "show_ratings"
+        if params[:show_ratings] then Settings.show_ratings = true else Settings.show_ratings = false end
+      end
+      render json: @setting
   end
 
   def export_to_csv  

@@ -7,7 +7,11 @@ class DocumentsController < ApplicationController
 
   def index
     @search = Document.search(params[:q])
-    @search.sorts = ['average_rating desc', 'title asc'] if @search.sorts.empty?
+    if Settings.show_ratings
+      @search.sorts = ['average_rating desc', 'title asc'] if @search.sorts.empty?
+    else
+      @search.sorts = ['ratings_count asc', 'title asc'] if @search.sorts.empty?
+    end
     @documents = @search.result.paginate(:page => params[:page], :per_page => 30)
     respond_with(@documents)
     

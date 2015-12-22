@@ -1,6 +1,5 @@
 class Settings < RailsSettings::CachedSettings
   def self.create_csv type  
-    puts "Hi"
     require 'csv'     
     @accepted_users = Submitter.joins(type).where("accepted = true").select("first_name", "last_name", "bio", "school", "teacher", "{type}.title")
     puts @accepted_users

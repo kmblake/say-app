@@ -45,4 +45,16 @@ class Document < ActiveRecord::Base
     update_attribute(:average_rating, average)
   end
 
+  def get_average_rating
+    if Settings.show_ratings
+      if self.average_rating
+        return self.average_rating.round(2)
+      else
+        return "n/a"
+      end
+    else
+      return "hidden"
+    end
+  end
+
 end

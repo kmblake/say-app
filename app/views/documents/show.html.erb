@@ -81,7 +81,7 @@
   		<% end %>
   		<br />
 
-  		<% if @document.ratings.count > 0 %>
+  		<% if @document.ratings.count > 0 and Settings.show_ratings %>
   		<div class="panel panel-default">
   		  <div class="panel-heading">
   		    <h3 class="panel-title">Average Rating: <%= @document.average_rating.round(2) %></h3>
