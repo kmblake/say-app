@@ -3,6 +3,11 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).on "page:change", ->
 
+  $("#comment-text").keydown( (e) ->
+    if e.keyCode == 13
+      $("#new_comment").submit()
+    )
+
   $("#new_comment").on("ajax:success", (e, data, status, xhr) ->
     # message = if rating.rating_val? then "Rating saved: " + rating.rating_val else "Rating reset"
     $("#comment-text").val("")

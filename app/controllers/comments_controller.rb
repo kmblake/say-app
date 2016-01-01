@@ -32,19 +32,6 @@ class CommentsController < ApplicationController
         render json: { errors: @comment.errors.full_messages }, status: 422
         # redirect_to document_path(@document)
       end
-
-			# @comment.artwork_id = params[:artwork_id]
-			# @artwork = Artwork.find(params[:artwork_id])
-			# if @comment.save
-			# 	redirect_to artwork_path(@artwork)
-			# else
-			# 	if Rating.exists?(:user_id => current_user.id, :artwork_id => @artwork.id)
-   #    				@rating = Rating.find_by_user_id_and_document_id(current_user.id, @artwork.id)
-   #  			else
-   #    				@rating = Rating.new
-   #  			end
-			# 	render :template => 'artworks/show'
-			end
 		end				
 	end
 
