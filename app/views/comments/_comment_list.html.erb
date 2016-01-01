@@ -1,0 +1,12 @@
+<% for comment in submission.comments.order("created_at desc") %>
+  <% commenter = User.find(comment.user_id) %>
+  <p>
+    <b><%= commenter.first_name %> <%= commenter.last_name %>: </b> <%= comment.comment_text %>
+    <br>
+    <% if commenter == current_user %>
+      <%= link_to 'Delete', comment, method: :delete, remote: :true %>
+    <% end %>
+  </p>
+  
+  <br />
+<% end %>

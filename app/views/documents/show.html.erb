@@ -94,11 +94,11 @@
   		</div>
   		<% end %>
 
-  		<%= form_for ([@document, @comment]) do |f| %>
+  		<%= form_for [@document, @comment], remote: true do |f| %>
 	
 			<div class="form-group">
 				<%= f.label :comment, "Comment:" %><br />
-			    <%= f.text_area :comment_text, cols: 100, rows: 8, class: "form-control" %>
+			    <%= f.text_area :comment_text, cols: 100, rows: 8, class: "form-control", id: "comment-text" %>
 			 </div>
 			 <div class="actions center">
     			<%= f.submit "Add Comment", class: "btn btn-info" %>
@@ -106,11 +106,9 @@
 
   		<% end %>
   		<br />
-  		<% for comment in @document.comments.order("created_at desc") %>
-  			<% commenter = User.find(comment.user_id) %>
-  			<p><b><%= commenter.first_name %> <%= commenter.last_name %>: </b> <%= comment.comment_text %></p>
-  			<br />
-  		<% end %>
+      <div id="comments-list">
+        <%= render partial: 'comments/comment_list', locals: {submission: @document} %>
+      </div>
 	</div>
 <% end %>
 
