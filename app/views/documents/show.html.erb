@@ -49,13 +49,14 @@
 	<div>
 		<p class="help-block">Preview window not showing up?  Try <%= link_to 'downloading the file directly', @document.file.url, target: "_blank" %>.</p>
 	</div>
-	<span>
+	<!-- <div class="col-md-9">
 		<iframe src="<%= doc_viewer_url %>&embedded=true" 
-		width="70%" height="800" frameborder="0" >
+		width="100%" height="800" frameborder="0" >
 		<p>Your browser does not support iframes.</p>
 		</iframe>
-	</span>
-	<span class="editor-tools">
+	</div> !-->
+	<div class="editor-tools col-md-3">
+    <div class="info"></div>
 
 		<%if current_admin then %>
 			<div id="approved-button" class="admin-actions center">
@@ -69,17 +70,14 @@
 		<% end %>
 		
 		
-		<%= form_for ([@document, @rating]) do |f| %>
+		<%= form_for [@document, @rating], remote: true do |f| %>
 	
 			<div class="form-group">
-				<%= f.label :rating, "Your rating:" %><br />
-			    <%= f.select :rating_val, Document::RATINGS, {prompt: "Rate this piece"}, class: "form-control", id: "rating-select" %>
-			 </div>
-			 <div class="actions center">
-    			<%= f.submit "Save Rating", class: "btn btn-success" %>
-  			</div>
+			 <%= f.label :rating, "Your rating:" %><br />
+			 <%= f.select :rating_val, Document::RATINGS, {prompt: "Rate this piece"}, class: "form-control", id: "rating-select" %>
+       <small class="text-muted" id="rating-info"></small>
+			</div>
   		<% end %>
-  		<br />
 
   		<% if @document.ratings.count > 0 and Settings.show_ratings %>
   		<div class="panel panel-default">
@@ -113,6 +111,6 @@
   			<p><b><%= commenter.first_name %> <%= commenter.last_name %>: </b> <%= comment.comment_text %></p>
   			<br />
   		<% end %>
-	</span>
+	</div>
 <% end %>
 

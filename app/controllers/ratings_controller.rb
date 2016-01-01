@@ -25,20 +25,17 @@ class RatingsController < ApplicationController
 	end
 
 	def update
+
 		if !params[:document_id].nil?
 			@rating = Rating.find_by_user_id_and_document_id(current_user.id, params[:document_id])
 			@rating.rating_val = params[:rating][:rating_val]
-			@document = Document.find(params[:document_id])
-			if @rating.save 
-				redirect_to document_path(@document)
-			end
+			@rating.save 
+			render json: @rating
 		elsif !params[:artwork_id].nil?
 			@rating = Rating.find_by_user_id_and_artwork_id(current_user.id, params[:artwork_id])
 			@rating.rating_val = params[:rating][:rating_val]
-			@artwork = Artwork.find(params[:artwork_id])
-			if @rating.save 
-				redirect_to artwork_path(@artwork)
-			end
+			@rating.save 
+			render json: @rating
 		end
 	end
 end
