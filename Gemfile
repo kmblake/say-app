@@ -79,3 +79,6 @@ gem "rails-settings-cached", "0.4.1"
 
 #Zip files
 gem 'rubyzip'
+
+#PDF viewer
+gem 'pdfjs_rails'

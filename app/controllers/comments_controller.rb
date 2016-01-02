@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
       end
 		elsif !params[:artwork_id].nil?
       @comment.artwork_id = params[:artwork_id]
-      @artwork = artwork.find(params[:artwork_id])
+      @artwork = Artwork.find(params[:artwork_id])
       @submission = @artwork
       if @comment.save 
         respond_to do |format|
@@ -37,13 +37,12 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
-    @comment.destroy
-    @submission 
     if @comment.document_id
       @submission = Document.find(@comment.document_id)
     else 
-      Artwork.find(@comment.artwork_id)
+      @submission = Artwork.find(@comment.artwork_id)
     end
+    @comment.destroy
     respond_to do |format|
       format.js {
        render :template => "comments/update-comments.js.erb"

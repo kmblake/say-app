@@ -23,8 +23,8 @@
   margin: auto;
 }
 
-.left-img {
-  width: 70%;
+.center-img {
+  width: 100%;
 }
 
 form.say-form {
@@ -84,6 +84,12 @@ form.say-form {
 
 .hidden {
   display: none
+}
+
+iframe {
+  background-image: url("http://jimpunk.net/Loading/wp-content/uploads/loading2.gif");   
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
 }
 
 
