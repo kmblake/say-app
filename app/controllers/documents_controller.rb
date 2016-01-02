@@ -69,6 +69,16 @@ class DocumentsController < ApplicationController
     render json: @document.accepted
   end
 
+  def gimme_another
+    nextDocId = Document.gimme_another(current_user)
+    if nextDocId == -1
+      flash.notice = "Congratulations!  You've rated all available submissions :)"
+      redirect_to documents_path
+    else
+      redirect_to document_path(nextDocId)
+    end
+  end
+
   def download
     require 'rubygems'
     require 'zip'

@@ -21,5 +21,6 @@ $(document).on "page:change", ->
       $(".new_rating :first-child :first-child").append('<input name="_method" type="hidden" value="patch">')
       newForm.removeClass('new_rating')
       newForm.addClass('edit_rating')
+      $('#gimme-another').removeClass("hidden")
     ).on "ajax:error", (e, xhr, status, error) ->
       $(".info").html("<div class='alert alert-danger'>Rating update failed.  Reload the page to see the current rating.</div>")

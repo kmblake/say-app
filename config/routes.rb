@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     end
     collection do 
       get 'download'
-      get 'test'
+      get 'gimme_another'
     end
   end
 

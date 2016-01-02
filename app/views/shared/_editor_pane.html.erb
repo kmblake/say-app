@@ -1,6 +1,5 @@
   <div class="editor-tools col-md-3">
     <div class="info"></div>
-
     <%if current_admin then %>
       <div id="approved-button" class="admin-actions center">
         <% button_action = submission.accepted ? "Reject" : "Accept" %>
@@ -12,6 +11,7 @@
       </div>
     <% end %>
     
+    <div class="center admin-actions"><%= link_to "Gimme Another!", send("gimme_another_#{type}s_path"), class: 'btn btn-warning hidden', id: 'gimme-another' %></div>
     
     <%= form_for [submission, @rating], remote: true do |f| %>
   
