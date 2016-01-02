@@ -58,13 +58,11 @@ class Document < ActiveRecord::Base
   end
 
   def self.gimme_another(current_user)
-    # current_user = User.find(14)
     already_rated = Document.joins(:ratings).where("ratings.user_id = #{current_user.id}").pluck(:id)
     if already_rated.length == Document.count()
       return -1
     else
       minRatingsCount = Document.where.not(id: already_rated).minimum(:ratings_count)
-      # possible = Document.select(:id).where(ratings_count: minRatingsCount).where.not(id: already_rated)
       return Document.select(:id).where(ratings_count: minRatingsCount).where.not(id: already_rated).order("RANDOM()").first.id
     end
   end

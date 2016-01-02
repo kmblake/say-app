@@ -64,6 +64,16 @@ class ArtworksController < ApplicationController
     render json: @artwork.accepted
   end
 
+  def gimme_another
+    nextArtId = Artwork.gimme_another(current_user)
+    if nextArtId == -1
+      flash.notice = "Congratulations!  You've rated all available submissions :)"
+      redirect_to artworks_path
+    else
+      redirect_to artwork_path(nextArtId)
+    end
+  end
+
   def download
     require 'rubygems'
     require 'zip'

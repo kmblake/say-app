@@ -20,7 +20,22 @@
 @import "bootstrap";
 @import "bootstrap3-switch";
 
+// CSS the overrides Bootstrap
+
  .tight-comment {
   padding-left: 10px;
   padding-right: 0px;
+}
+
+.row-height {
+  display: table;
+  table-layout: fixed;
+  height: 100%;
+  width: 100%;
+}
+
+.col-height {
+  display: table-cell;
+  float: none;
+  height: 100%;
 }
