@@ -45,4 +45,26 @@ class Document < ActiveRecord::Base
     update_attribute(:average_rating, average)
   end
 
+  def get_average_rating
+    if Settings.show_ratings
+      if self.average_rating
+        return self.average_rating.round(2)
+      else
+        return "n/a"
+      end
+    else
+      return "hidden"
+    end
+  end
+
+  def self.gimme_another(current_user)
+    already_rated = Document.joins(:ratings).where("ratings.user_id = #{current_user.id}").pluck(:id)
+    if already_rated.length == Document.count()
+      return -1
+    else
+      minRatingsCount = Document.where.not(id: already_rated).minimum(:ratings_count)
+      return Document.select(:id).where(ratings_count: minRatingsCount).where.not(id: already_rated).order("RANDOM()").first.id
+    end
+  end
+
 end

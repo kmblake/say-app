@@ -7,7 +7,11 @@ class DocumentsController < ApplicationController
 
   def index
     @search = Document.search(params[:q])
-    @search.sorts = ['average_rating desc', 'title asc'] if @search.sorts.empty?
+    if Settings.show_ratings
+      @search.sorts = ['average_rating desc', 'title asc'] if @search.sorts.empty?
+    else
+      @search.sorts = ['ratings_count asc', 'title asc'] if @search.sorts.empty?
+    end
     @documents = @search.result.paginate(:page => params[:page], :per_page => 30)
     respond_with(@documents)
     
@@ -63,6 +67,16 @@ class DocumentsController < ApplicationController
     @document.toggle :accepted
     @document.save
     render json: @document.accepted
+  end
+
+  def gimme_another
+    nextDocId = Document.gimme_another(current_user)
+    if nextDocId == -1
+      flash.notice = "Congratulations!  You've rated all available submissions :)"
+      redirect_to documents_path
+    else
+      redirect_to document_path(nextDocId)
+    end
   end
 
   def download

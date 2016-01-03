@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     end
     collection do 
       get 'download'
+      get 'gimme_another'
     end
     resources :ratings, :comments
   end
@@ -21,7 +22,7 @@ Rails.application.routes.draw do
     end
     collection do 
       get 'download'
-      get 'test'
+      get 'gimme_another'
     end
   end
 

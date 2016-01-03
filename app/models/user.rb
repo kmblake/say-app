@@ -43,6 +43,15 @@ class User < ActiveRecord::Base
     self.temp_pw = pw
   end
 
+  def rated_all(type)
+    if type == 'Document'
+      Document.joins(:ratings).where("ratings.user_id = #{self.id}").count() == Document.count()
+    else 
+      Artwork.joins(:ratings).where("ratings.user_id = #{self.id}").count() == Artwork.count()
+    end
+    # send('#{type}.joins(:ratings).where("ratings.user_id = #{self.id}").count()') == send('#{type}.count()')
+  end
+
   ransacker :full_name do |parent|
     Arel::Nodes::InfixOperation.new('||',
       Arel::Nodes::InfixOperation.new('||', parent.table[:first_name], ' '),

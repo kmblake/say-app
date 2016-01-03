@@ -1,23 +1,30 @@
 <% if current_editor || current_admin %>
-  <h2>Written Submissions (<%= @documents.count %>)</h2>
-  <div class="search">
-    <%= search_form_for @search, html: {class: "form-inline"} do |f| %>
-      <div class="form-group">
-        <%= f.text_field :title_or_style_or_user_school_or_user_full_name_cont, placeholder: "Search...", class: "form-control", style: "width: 500px" %>
-        <%= button_tag(type: 'submit', class: "btn") do %>
-          <span class="glyphicon glyphicon-search"></span> 
-        <% end %>
-      </div>
-    <% end %>
+<div class="row row-height">
+  <div class="col-md-9 col-height">
+    <h2>Written Submissions (<%= @documents.count %>)</h2>
+    <div class="search">
+      <%= search_form_for @search, html: {class: "form-inline"} do |f| %>
+        <div class="form-group">
+          <%= f.text_field :title_or_style_or_user_school_or_user_full_name_cont, placeholder: "Search...", class: "form-control", style: "width: 500px" %>
+          <%= button_tag(type: 'submit', class: "btn") do %>
+            <span class="glyphicon glyphicon-search"></span> 
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
+  <div class="col-md-3 center col-height">
+    <%= if !Settings.show_ratings and !current_user.rated_all("Document") then link_to "Start Rating!", gimme_another_documents_path, class: 'btn-block btn-lg btn-success pagingation-center', id: 'gimme-another' end %>
+  </div>
+</div>
   <table class="table table-striped">
   <thead>
     <th><%= sort_link(@search, :title, "Title") %></th>
     <th><%= sort_link(@search, :style, "Style") %></th>
     <th><%= sort_link(@search, :user_full_name, "Author") %></th>
     <th><%= sort_link(@search, :user_school, "School") %></th>
-    <th><%= sort_link(@search, :ratings_count, "# of Ratings") %></th>
-    <th><%= sort_link(@search, :average_rating, [:average_rating, 'title asc'], "Average Rating") %></th>
+    <th><%= sort_link(@search, :ratings_count, [:ratings_count, 'title asc'], "# of Ratings") %></th>
+    <th><%= sort_link(@search, :average_rating, [:average_rating, 'title asc'], "Average Rating") %></th>  
     <th><%= sort_link(@search, :accepted, [:accepted, 'average_rating desc'], "Accepted") %></th>
   </thead>
   <tbody>
@@ -32,7 +39,7 @@
           <td><%= doc.submitter.first_name + ' ' + doc.submitter.last_name %></td>
           <td><%= doc.submitter.school %></td>
           <td><%= doc.ratings_count %></td>
-          <td><%= doc.average_rating ? doc.average_rating.round(2) : "n/a"  %></td>
+          <td><%= doc.get_average_rating %></td>
           <td><%= if doc.accepted then "Y" else "N" end %></td>
         </tr>
     <% end %>
@@ -43,29 +50,3 @@
 
 <%= will_paginate @documents, renderer: BootstrapPagination::Rails %>
 <% end %>
-
-<!--
-  <h2>Written Submissions</h2>
-  <table class="table table-striped">
-    <thead>
-      <th>#</th>
-      <th>Title</th>
-      <th>Submitter</th>
-      <th>Style</th>
-      <th>Submitted On:</th>
-      <th></th>
-    </thead>
-    <tbody>
-      <% @documents.each_with_index do |doc, i| %>
-        <tr>
-          <td><%= i + 1 %></td>
-          <td><%= link_to doc.title, document_path(doc.id)  %></td>
-          <td><%= link_to doc.user.name, user_path(doc.user.id) %>
-          <td><%= doc.style %></td>
-          <td><%= doc.created_at.strftime("%m/%d/%Y at %I:%M %p") %></td>
-          <td><%= link_to 'Remove', doc, method: :delete %>
-        </tr>
-    <% end %>
-  </table>
-
--->
