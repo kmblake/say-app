@@ -33,6 +33,10 @@ class Artwork < ActiveRecord::Base
     update_attribute(:average_rating, average)
   end
 
+  def secureUrl(size)
+    self.image.url(size).insert(4, 's')
+  end
+
   def self.gimme_another(current_user)
     already_rated = Artwork.joins(:ratings).where("ratings.user_id = #{current_user.id}").pluck(:id)
     if already_rated.length == Artwork.count()

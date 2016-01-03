@@ -57,6 +57,10 @@ class Document < ActiveRecord::Base
     end
   end
 
+  def secureUrl
+    self.file.url.insert(4, 's')
+  end
+
   def self.gimme_another(current_user)
     already_rated = Document.joins(:ratings).where("ratings.user_id = #{current_user.id}").pluck(:id)
     if already_rated.length == Document.count()

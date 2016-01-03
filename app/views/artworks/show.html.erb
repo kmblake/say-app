@@ -15,6 +15,6 @@
 	<div class="jumbotron">
 	  <h1 class="center"><%= @artwork.title %></h1>
 	</div>
-  <div class="col-md-9"><%= image_tag @artwork.image.url(:medium), class: 'center-img' %></div>
+  <div class="col-md-9"><%= image_tag @artwork.secureUrl(:medium), class: 'center-img' %></div>
   <%= render partial: 'shared/editor_pane', locals: {submission: @artwork, type: "artwork"} %>
 <% end %>
