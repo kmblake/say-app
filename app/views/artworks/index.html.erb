@@ -40,7 +40,7 @@
             <td><%= art.user.name %></td>
             <td><%= art.user.school %></td>
             <td><%= art.ratings_count %></td>
-            <td><%= art.average_rating ? art.average_rating.round(2) : "n/a" %></td>
+            <td><%= art.get_average_rating %></td>
             <td><%= if art.accepted then "Y" else "N" end %></td>
           </tr>
       <% end %>

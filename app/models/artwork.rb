@@ -37,6 +37,18 @@ class Artwork < ActiveRecord::Base
     self.image.url(size).insert(4, 's')
   end
 
+  def get_average_rating
+    if Settings.show_ratings
+      if self.average_rating
+        return self.average_rating.round(2)
+      else
+        return "n/a"
+      end
+    else
+      return "hidden"
+    end
+  end
+
   def self.gimme_another(current_user)
     already_rated = Artwork.joins(:ratings).where("ratings.user_id = #{current_user.id}").pluck(:id)
     if already_rated.length == Artwork.count()
