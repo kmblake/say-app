@@ -52,6 +52,26 @@ class User < ActiveRecord::Base
     # send('#{type}.joins(:ratings).where("ratings.user_id = #{self.id}").count()') == send('#{type}.count()')
   end
 
+  def ratings_count(type)
+    if type == "document"
+      self.ratings.where.not(document_id: nil).count()
+    else
+      self.ratings.where.not(artwork_id: nil).count()
+    end
+  end
+
+  def avg_rating(type)
+    if self.ratings_count(type) > 0
+      if type == "document"
+        ratings.where.not(document_id: nil).average(:rating_val).round(2).to_digits()
+      else
+        ratings.where.not(artwork_id: nil).average(:rating_val).round(2).to_digits()
+      end
+    else
+      "n/a"
+    end
+  end
+
   ransacker :full_name do |parent|
     Arel::Nodes::InfixOperation.new('||',
       Arel::Nodes::InfixOperation.new('||', parent.table[:first_name], ' '),

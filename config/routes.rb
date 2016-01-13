@@ -62,6 +62,7 @@ Rails.application.routes.draw do
       get 'admin_tools'
       get 'new_submitter'
       post 'create_submitter'
+      get 'leaderboards'
     end
   end
 

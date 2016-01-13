@@ -1,0 +1,37 @@
+<% if current_editor || current_admin %>
+    <h2>Leaderboard</h2>
+    <div class="hidden">
+      <%= search_form_for @search, html: {class: "form-inline"} do |f| %>
+        <div class="form-group">
+          <%= f.search_field :full_name, placeholder: "Search...", class: "form-control", style: "width: 500px" %>
+          <%= button_tag(type: 'submit', class: "btn") do %>
+            <span class="glyphicon glyphicon-search"></span> 
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <table class="table table-striped">
+  <thead>
+    <th><%= sort_link(@search, :name, "Name") %></th>
+    <th><%= sort_link(@search, :art_ratings_total, "Total Art Ratings") %></th>
+    <th><%= sort_link(@search, :art_ratings_avg, "Average Art Rating") %></th>
+    <th><%= sort_link(@search, :doc_ratings_total, "Total Doc Ratings") %></th>
+    <th><%= sort_link(@search, :doc_ratings_avg, "Average Doc Rating") %></th>
+  </thead>
+  <tbody>
+    <% @all_editors.each do |u| %>
+        <tr>
+          <td><%= u.name %></td>
+          <td><%= u.ratings_count("artwork")  %></td>
+          <td><%= u.avg_rating("artwork")  %></td>
+          <td><%= u.ratings_count("document")  %></td>
+          <td><%= u.avg_rating("document")  %></td>
+        </tr>
+
+    <% end %>
+
+  </tbody>
+
+</table>
+
+<% end %>
