@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
 		@comment = Comment.new	
 		@comment.user_id = current_user.id
 		@comment.comment_text = params[:comment][:comment_text]
+    @comment.title_suggestion = params[:comment][:title_suggestion]
     	
 		if !params[:document_id].nil?
 	    	@comment.document_id = params[:document_id]

@@ -6,6 +6,9 @@
         <strong><%= commenter.first_name %> <%= commenter.last_name %></strong> <span class="text-muted"><%= comment.created_at.strftime("%m-%d-%y %l:%M %p") %></span>
   </div>
   <div class="panel-body">
+    <% if comment.title_suggestion %>
+    TITLE SUGGESTION:
+    <% end %>
     <%= comment.comment_text %>
       <br>
       <% if commenter == current_user %>
