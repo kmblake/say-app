@@ -52,4 +52,11 @@ class CommentsController < ApplicationController
     # response here
   end
 
+  def index
+    @search = Comment.where(title_suggestion: true).search(params[:q])
+
+    @search.sorts = ['comment_text asc'] if @search.sorts.empty?
+    @comments = @search.result.paginate(:page => params[:page], :per_page => 30)
+  end
+
 end

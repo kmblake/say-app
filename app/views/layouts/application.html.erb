@@ -26,6 +26,7 @@
                   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                     <li role="presentation"><%= link_to 'Written Submissions', home_index_path %></li>
                     <li role="presentation"><%= link_to 'Art Submissions', artworks_path %></li>
+                    <li role="presentation"><%= link_to 'Title Suggestions', comments_path %></li>
                     <% unless current_admin %>
                     <li role="presentation"><%= link_to 'Submitter Index', users_path %></li>
                     <% end %>

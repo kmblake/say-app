@@ -1,0 +1,39 @@
+<% if current_editor || current_admin %>
+    <h2>Title Suggestions</h2>
+    <div class="hidden">
+      <%= search_form_for @search, html: {class: "form-inline"} do |f| %>
+        <div class="form-group">
+          <%= f.search_field :comment_text, placeholder: "Search...", class: "form-control", style: "width: 500px" %>
+          <%= button_tag(type: 'submit', class: "btn") do %>
+            <span class="glyphicon glyphicon-search"></span> 
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <table class="table table-striped">
+  <thead>
+    <th><%= sort_link(@search, :comment_text, "Title Suggestion") %></th>
+    <th>Submission</th>
+    <th>Accepted</th>
+    <th><%= sort_link(@search, :suggested_by, "Suggested By") %></th>
+  </thead>
+  <tbody>
+    <% @comments.each do |c| %>
+      <% doc = c.document %>
+        <tr>
+          <% if doc %>
+          <td><%= c.comment_text %></td>
+          <td><%= link_to doc.title, document_path(doc.id)  %></td>
+          <td><%= if doc.accepted then "Y" else "N" end %></td>
+          <td><%= c.user.name %></td>
+          <% end %>
+        </tr>
+
+    <% end %>
+
+  </tbody>
+
+</table>
+
+<%= will_paginate @documents, renderer: BootstrapPagination::Rails %>
+<% end %>
