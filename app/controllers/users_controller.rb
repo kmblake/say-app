@@ -91,6 +91,14 @@ class UsersController < ApplicationController
     
   end
 
+  def leaderboards
+    # @all_editors = User.where(role: ["Editor", "Admin"])
+    @search = User.where(role: ["Editor", "Admin"]).search(params[:q])
+
+    @search.sorts = ['ratings_count desc'] if @search.sorts.empty?
+    @all_editors = @search.result
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user

@@ -11,6 +11,7 @@ $(document).on "page:change", ->
   $("#new_comment").on("ajax:success", (e, data, status, xhr) ->
     # message = if rating.rating_val? then "Rating saved: " + rating.rating_val else "Rating reset"
     $("#comment-text").val("")
+    $("#title-suggestion").attr('checked', false)
     ).on "ajax:error", (e, xhr, status, error) ->
       errors = $.parseJSON(xhr.responseText).errors
       $(".info").html("<div class='alert alert-danger'>Comment did not save.  Please try again. Errors: " + errors + "</div>")

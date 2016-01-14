@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
 		@comment = Comment.new	
 		@comment.user_id = current_user.id
 		@comment.comment_text = params[:comment][:comment_text]
+    @comment.title_suggestion = params[:comment][:title_suggestion]
     	
 		if !params[:document_id].nil?
 	    	@comment.document_id = params[:document_id]
@@ -49,6 +50,13 @@ class CommentsController < ApplicationController
       }
     end
     # response here
+  end
+
+  def index
+    @search = Comment.where(title_suggestion: true).search(params[:q])
+
+    @search.sorts = ['comment_text asc'] if @search.sorts.empty?
+    @comments = @search.result.includes(:user).paginate(:page => params[:page], :per_page => 30)
   end
 
 end
