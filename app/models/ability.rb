@@ -45,7 +45,7 @@ class Ability
     if user.role == "Editor" && user.approved
         can [:read, :update, :gimme_another], Document
         can [:read, :update, :gimme_another], Artwork
-        can [:create, :read, :update, :destroy], User
+        can :manage, User
     end
 
     if user.role == "Admin"
