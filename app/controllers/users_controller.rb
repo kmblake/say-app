@@ -95,7 +95,7 @@ class UsersController < ApplicationController
     # @all_editors = User.where(role: ["Editor", "Admin"])
     @search = User.where(role: ["Editor", "Admin"]).search(params[:q])
 
-    @search.sorts = ['doc_ratings_total desc'] if @search.sorts.empty?
+    @search.sorts = ['ratings_count desc'] if @search.sorts.empty?
     @all_editors = @search.result
   end
 

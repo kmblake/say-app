@@ -1,9 +1,9 @@
 <% if current_editor || current_admin %>
     <h2>Title Suggestions</h2>
-    <div class="hidden">
+    <div class="search">
       <%= search_form_for @search, html: {class: "form-inline"} do |f| %>
         <div class="form-group">
-          <%= f.search_field :comment_text, placeholder: "Search...", class: "form-control", style: "width: 500px" %>
+          <%= f.search_field :comment_text_cont, placeholder: "Search...", class: "form-control", style: "width: 500px" %>
           <%= button_tag(type: 'submit', class: "btn") do %>
             <span class="glyphicon glyphicon-search"></span> 
           <% end %>
@@ -15,7 +15,7 @@
     <th><%= sort_link(@search, :comment_text, "Title Suggestion") %></th>
     <th>Submission</th>
     <th>Accepted</th>
-    <th><%= sort_link(@search, :suggested_by, "Suggested By") %></th>
+    <th><%= sort_link(@search, :user_full_name, "Suggested By") %></th>
   </thead>
   <tbody>
     <% @comments.each do |c| %>

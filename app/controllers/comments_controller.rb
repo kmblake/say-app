@@ -56,7 +56,7 @@ class CommentsController < ApplicationController
     @search = Comment.where(title_suggestion: true).search(params[:q])
 
     @search.sorts = ['comment_text asc'] if @search.sorts.empty?
-    @comments = @search.result.paginate(:page => params[:page], :per_page => 30)
+    @comments = @search.result.includes(:user).paginate(:page => params[:page], :per_page => 30)
   end
 
 end

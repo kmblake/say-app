@@ -1,5 +1,5 @@
 class Rating < ActiveRecord::Base
-	belongs_to :user
+	belongs_to :user, counter_cache: true
 	belongs_to :document, counter_cache: true
 	belongs_to :artwork, counter_cache: true
 	validates :rating_val, presence: true
