@@ -14,8 +14,8 @@
   <thead>
     <th><%= sort_link(@search, :last_name, "Name") %></th>
     <th><%= sort_link(@search, :ratings_count, "Total Ratings") %></th>
-    <th><%= "Average Doc Rating" %></th>
-    <th><%= "Average Art Rating" %></th>
+    <th>Average Doc Rating (<%= Rating.where(artwork_id: nil).average(:rating_val).round(2) %> overall)</th>
+    <th>Average Art Rating (<%= Rating.where(document_id: nil).average(:rating_val).round(2) %> overall)</th>
   </thead>
   <tbody>
     <% @all_editors.each do |u| %>
