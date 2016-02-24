@@ -1,4 +1,4 @@
-<% for comment in submission.comments.order("created_at desc") %>
+<% for comment in submission.comments.order("created_at asc") %>
   <% commenter = User.find(comment.user_id) %>
   <div class="tight-comment col-sm-12">
     <div class="panel panel-default">

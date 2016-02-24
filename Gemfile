@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0'
+ruby '2.3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'
@@ -72,7 +72,7 @@ gem 'ransack'
 
 #pagination
 gem 'will_paginate-bootstrap'
-gem 'will_paginate', '~> 3.0.6'
+gem 'will_paginate', '~> 3.0.7'
 
 #App settings
 gem "rails-settings-cached", "0.4.1"
