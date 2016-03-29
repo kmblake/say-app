@@ -1,5 +1,5 @@
 <div class="jumbotron">
-    <h1 class="center"><%= @document.title %> <span class="weak"> (<%= @document.style %>)</span>
+    <h1 class="center"><%= submission.title %> <span class="weak"> <% if type == "document" %>(<%= @document.style %>)</span><% end %>
 
       <span>
         <% flag_classes = submission.flag ? ["glyphicon", "glyphicon-flag", "h1-font-size", "red"]: ["glyphicon", "glyphicon-flag", "h1-font-size", "weak"] %>
@@ -11,5 +11,5 @@
       </span>
 
     </h1>
-    <p class="center">By: <%=link_to @document.user.name, user_path(@document.user) %></p>
+    <p class="center">By: <%=link_to submission.user.name, user_path(submission.user) %></p>
   </div>

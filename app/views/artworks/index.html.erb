@@ -20,6 +20,7 @@
 
 <table class="table table-striped">
   <thead>
+    <th><%= sort_link(@search, :flag, [:flag, 'title asc'], "Flag") %></th>
     <th><%= sort_link(@search, :title, "Title") %></th>
     <th>Thumbnail</th>
     <th><%= sort_link(@search, :user_full_name, "Author") %></th>
@@ -35,6 +36,7 @@
         <% else %>
           <tr>
         <% end %>
+            <td><%if art.flag then %><span class="glyphicon glyphicon-flag red" aria-hidden="true"></span><% end %></td>
             <td><%= link_to art.title, artwork_path(art.id)  %></td>
             <td><%= image_tag art.secureUrl(:thumb) %></td>
             <td><%= art.user.name %></td>

@@ -64,6 +64,12 @@ class ArtworksController < ApplicationController
     render json: @artwork.accepted
   end
 
+  def toggle_flag
+    @artwork.toggle :flag
+    @artwork.save
+    render json: @artwork.flag
+  end
+
   def gimme_another
     nextArtId = Artwork.gimme_another(current_user)
     if nextArtId == -1

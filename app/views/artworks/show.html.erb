@@ -12,9 +12,7 @@
 <% end %>
 
 <% if current_editor || current_admin %>
-	<div class="jumbotron">
-	  <h1 class="center"><%= @artwork.title %></h1>
-	</div>
+	<%= render partial: 'shared/title_pane', locals: {submission: @artwork, type: "artwork"} %>
   <div class="col-md-9"><%= image_tag @artwork.secureUrl(:medium), class: 'center-img' %></div>
   <%= render partial: 'shared/editor_pane', locals: {submission: @artwork, type: "artwork"} %>
 <% end %>
