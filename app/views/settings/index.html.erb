@@ -32,6 +32,17 @@
   </div>
 <% end %>
 
+<%= form_tag 'settings/' + Settings.find_by_var("show_ratings").id.to_s, method: :put, remote: true, class: "form-horizontal", id: "show_ratings_switch" do |f| %>
+  <div class="form-group">
+    <div class="col-sm-3">
+      <h2 class="h4"><span class="glyphicon glyphicon-question-sign" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Showing ratings allows editors (but not submitters) to see other editors' ratings.  When this is on, default sort order is average rating.  When it is off, default sort order is average number of ratings."> </span>  Show Ratings</h2>
+    </div> 
+    <div class="col-sm-9">
+      <%= check_box_tag 'show_ratings', 'true', Settings.show_ratings, class: 'form-control' %>
+    </div>
+  </div>
+<% end %>
+
 <div class="form-group">
 <%= link_to 'Download Accepted Submissions', download_documents_path, data: {:'loading-text' => "Loading..."}, class: 'btn btn-lg btn-primary', id: 'loading-btn'  %>
 </div>

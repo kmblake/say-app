@@ -33,7 +33,7 @@ class SettingsController < ApplicationController
        @accepted_users_art.each do |user|
          csv << [user.first_name, user.last_name, user.email, user.bio, user.school, user.teacher, "Art", user.title]
        end
-    end         
+    end  
 
     send_data csv_string,
     :type => 'text/csv; charset=iso-8859-1; header=present',
