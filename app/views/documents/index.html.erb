@@ -34,7 +34,7 @@
       <% else %>
         <tr>
       <% end %>
-          <td><%= link_to doc.title, document_path(doc.id)  %></td>
+          <td><%if doc.flag then %><span class="glyphicon glyphicon-flag red" aria-hidden="true"></span><% end %> <%= link_to doc.title, document_path(doc.id)  %></td>
           <td><%= doc.style %></td>
           <td><%= doc.submitter.first_name + ' ' + doc.submitter.last_name %></td>
           <td><%= doc.submitter.school %></td>
