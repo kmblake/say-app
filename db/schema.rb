@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20160329195015) do
     t.string   "status",             default: "Under Review"
     t.integer  "ratings_count",      default: 0,              null: false
     t.float    "average_rating"
-    t.boolean  "flag"
+    t.boolean  "flag",               default: false
   end
 
   create_table "comments", force: true do |t|
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20160329195015) do
     t.string   "status",            default: "Under Review"
     t.integer  "ratings_count",     default: 0,              null: false
     t.float    "average_rating"
-    t.boolean  "flag"
+    t.boolean  "flag",              default: false
   end
 
   create_table "ratings", force: true do |t|
