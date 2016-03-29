@@ -21,10 +21,9 @@
 <% end %>
 
 <% if current_editor || current_admin %>
-  <div class="jumbotron">
-    <h1 class="center"><%= @document.title %> <span class="weak"> (<%= @document.style %>)</span></h1>
-    <p class="center">By: <%=link_to @document.user.name, user_path(@document.user) %></p>
-  </div>
+  <%= render partial: 'shared/title_pane', locals: {submission: @document, type: "document"} %>
+
+  
   <div>
     <p class="help-block">Preview window not showing up?  Try <%= link_to 'downloading the file directly', @document.file.url, target: "_blank" %>.</p>
   </div>

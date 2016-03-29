@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :artworks do
     member do 
       post 'toggle_approved'
+      post 'toggle_flag'
     end
     collection do 
       get 'download'
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
     resources :ratings, :comments
     member do 
       post 'toggle_approved'
+      post 'toggle_flag'
     end
     collection do 
       get 'download'

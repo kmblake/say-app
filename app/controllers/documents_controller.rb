@@ -69,6 +69,12 @@ class DocumentsController < ApplicationController
     render json: @document.accepted
   end
 
+  def toggle_flag
+    @document.toggle :flag
+    @document.save
+    render json: @document.flag
+  end
+
   def gimme_another
     nextDocId = Document.gimme_another(current_user)
     if nextDocId == -1
