@@ -1,0 +1,15 @@
+<div class="jumbotron">
+    <h1 class="center"><%= submission.title %> <span class="weak"> <% if type == "document" %>(<%= @document.style %>)</span><% end %>
+
+      <span>
+        <% flag_classes = submission.flag ? ["glyphicon", "glyphicon-flag", "h1-font-size", "red"]: ["glyphicon", "glyphicon-flag", "h1-font-size", "weak"] %>
+        <%= link_to send("toggle_flag_#{type}_path".to_sym, submission), remote: true, method: :post, class: "btn btn-lg", id: "flag" do %>
+          <%= content_tag :span, nil, class: flag_classes, id: "flag-icon" %>
+          <!-- <span class=<%= flag_classes %> id="flag-icon"></span> -->
+          <!-- <i class="glyphicon glyphicon-flag red">Test</i> -->
+        <% end %>
+      </span>
+
+    </h1>
+    <p class="center">By: <%=link_to submission.user.name, user_path(submission.user) %></p>
+  </div>

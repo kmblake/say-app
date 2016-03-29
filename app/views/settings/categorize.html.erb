@@ -1,0 +1,11 @@
+<div class="jumbotron">
+  <h1>Cutoffs</h1>
+  <p>This tool allows you to set cutoffs for accepted and flagged submissions.  Any submission with two ratings that differ by 2 or more will also automatically be flagged.</p>
+</div>
+
+<%= form_tag do |f| %>
+  <div class="form-group">
+    <%= label_tag(:acceptMin, "Accept everything with a rating of at least") %>
+    <%= text_field_tag(:acceptMin) %>
+  </div>
+<% end %>

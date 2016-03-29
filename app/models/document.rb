@@ -71,4 +71,16 @@ class Document < ActiveRecord::Base
     end
   end
 
+  def self.categorize(minFlag, minAccept)
+    Document.all.each do |doc| 
+      if doc.average_rating < minAccept and doc.average_rating >= minFlag then doc.flag = true end
+      if doc.ratings.count == 2
+        ratings = doc.ratings.pluck(:rating_val)
+        if (ratings[0] - ratings[1]).abs >= 2 then doc.flag = true end
+      end
+      if doc.average_rating >= minAccept then doc.accepted = true end
+      doc.save()
+    end
+  end
+
 end

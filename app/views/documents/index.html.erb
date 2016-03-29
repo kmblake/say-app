@@ -1,7 +1,7 @@
 <% if current_editor || current_admin %>
 <div class="row row-height">
   <div class="col-md-9 col-height">
-    <h2>Written Submissions (<%= @documents.count %>)</h2>
+    <h2>Written Submissions <span class='text-muted'>(<%= if Settings.show_ratings then "Accepted: #{@documents.where(accepted: true).count}, Total: " end%><%= @documents.count %>)</span></h2>
     <div class="search">
       <%= search_form_for @search, html: {class: "form-inline"} do |f| %>
         <div class="form-group">
@@ -19,12 +19,13 @@
 </div>
   <table class="table table-striped">
   <thead>
+    <th><%= sort_link(@search, :flag, [:flag, 'title asc'], "Flag") %></th>
     <th><%= sort_link(@search, :title, "Title") %></th>
     <th><%= sort_link(@search, :style, "Style") %></th>
     <th><%= sort_link(@search, :user_full_name, "Author") %></th>
     <th><%= sort_link(@search, :user_school, "School") %></th>
     <th><%= sort_link(@search, :ratings_count, [:ratings_count, 'title asc'], "# of Ratings") %></th>
-    <th><%= sort_link(@search, :average_rating, [:average_rating, 'title asc'], "Average Rating") %></th>  
+    <th><%= sort_link(@search, :average_rating, [:average_rating, 'title asc'], "Avg Rating") %></th>  
     <th><%= sort_link(@search, :accepted, [:accepted, 'average_rating desc'], "Accepted") %></th>
   </thead>
   <tbody>
@@ -34,6 +35,7 @@
       <% else %>
         <tr>
       <% end %>
+          <td><%if doc.flag then %><span class="glyphicon glyphicon-flag red" aria-hidden="true"></span><% end %></td>
           <td><%= link_to doc.title, document_path(doc.id)  %></td>
           <td><%= doc.style %></td>
           <td><%= doc.submitter.first_name + ' ' + doc.submitter.last_name %></td>
