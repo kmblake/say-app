@@ -26,7 +26,7 @@
     <th><%= sort_link(@search, :user_school, "School") %></th>
     <th><%= sort_link(@search, :ratings_count, [:ratings_count, 'title asc'], "# of Ratings") %></th>
     <th><%= sort_link(@search, :average_rating, [:average_rating, 'title asc'], "Avg Rating") %></th>  
-    <th><%= sort_link(@search, :accepted, [:accepted, 'average_rating desc'], "Accepted") %></th>
+    <th><%= sort_link(@search, :accepted, [:accepted, 'user_full_name asc'], "Accepted") %></th>
   </thead>
   <tbody>
     <% @documents.each do |doc| %>
