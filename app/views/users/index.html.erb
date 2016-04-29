@@ -13,6 +13,8 @@
   <table class="table table-striped">
     <thead>
       <th><%= sort_link(@search, :last_name, "Name") %></th>
+      <th><%= sort_link(@search, :accepted_art_count, "Accepted Art") %></th>
+      <th><%= sort_link(@search, :accepted_doc_count, "Accepted Writing") %></th>
       <th><%= sort_link(@search, :email, "Email") %></th>
       <th><%= sort_link(@search, :school, "School") %></th>
       <th><%= sort_link(@search, :teacher, "Teacher") %></th>
@@ -21,8 +23,10 @@
     <tbody>
       <% @submitters.each do |submitter| %>
         <tr>
-          <td class="col-md-4"><%= link_to submitter.name, user_path(submitter) %></td>
-          <td class="col-md-4"><%= submitter.email %></td>
+          <td class="col-md-2"><%= link_to submitter.name, user_path(submitter) %></td>
+          <td class="col-md-2"><%= submitter.accepted_art_count %></td>
+          <td class="col-md-2"><%= submitter.accepted_doc_count %></td>
+          <td class="col-md-2"><%= submitter.email %></td>
           <td class="col-md-2"><%= submitter.school %></td>
           <td class="col-md-2"><%= submitter.teacher %></td>
           <td class="col-md-2"><%= submitter.grade %></td>
