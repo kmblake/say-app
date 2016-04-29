@@ -1,12 +1,22 @@
 <h2>Submitters</h2>
+<div class="search">
+  <%= search_form_for @search, url: users_path, html: {class: "form-inline"} do |f| %>
+    <div class="form-group">
+      <%= f.text_field :school_or_first_name_or_last_name_cont, placeholder: "Search...", class: "form-control", style: "width: 500px" %>
+      <%= button_tag(type: 'submit', class: "btn") do %>
+        <span class="glyphicon glyphicon-search"></span> 
+      <% end %>
+    </div>
+  <% end %>
+</div>
 <% if @submitters.any? %>
   <table class="table table-striped">
     <thead>
-      <th>Name</th>
-      <th>Email</th>
-      <th>School</th>
-      <th>Teacher</th>
-      <th>Grade</th>
+      <th><%= sort_link(@search, :last_name, "Name") %></th>
+      <th><%= sort_link(@search, :email, "Email") %></th>
+      <th><%= sort_link(@search, :school, "School") %></th>
+      <th><%= sort_link(@search, :teacher, "Teacher") %></th>
+      <th><%= sort_link(@search, :grade, "Grade") %></th>
     </thead>
     <tbody>
       <% @submitters.each do |submitter| %>
