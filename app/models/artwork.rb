@@ -1,8 +1,11 @@
 class Artwork < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user, counter_cache: true
   has_many :comments, dependent: :destroy
   has_many :ratings, dependent: :destroy
   has_attached_file :image, :styles => {:medium => "800x800>", :thumb => "100x100>" }
+
+  after_save :update_accepted_count, if: :accepted_changed?
+  after_destroy :update_accepted_count
 
   validates_attachment_presence :image
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png"]
@@ -47,6 +50,12 @@ class Artwork < ActiveRecord::Base
     else
       return "hidden"
     end
+  end
+
+  def update_accepted_count
+    u = self.user
+    u.accepted_art_count = u.artworks.where(accepted:true).count
+    u.save
   end
 
   def self.gimme_another(current_user)

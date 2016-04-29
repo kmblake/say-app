@@ -38,7 +38,7 @@
           <td><%if doc.flag then %><span class="glyphicon glyphicon-flag red" aria-hidden="true"></span><% end %></td>
           <td><%= link_to doc.title, document_path(doc.id)  %></td>
           <td><%= doc.style %></td>
-          <td><%= doc.submitter.first_name + ' ' + doc.submitter.last_name %></td>
+          <td><%= link_to doc.submitter.name, user_path(doc.submitter.id) %></td>
           <td><%= doc.submitter.school %></td>
           <td><%= doc.ratings_count %></td>
           <td><%= doc.get_average_rating %></td>

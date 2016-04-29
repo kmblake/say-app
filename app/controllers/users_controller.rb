@@ -9,7 +9,10 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @submitters = Submitter.all
+    @search = Submitter.search(params[:q])
+    @search.sorts = ['last_name asc'] if @search.sorts.empty?
+    @submitters = @search.result()
+    respond_with(@submitters)
   end
 
   # GET /users/1

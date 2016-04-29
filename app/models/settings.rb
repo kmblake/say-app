@@ -1,14 +1,14 @@
 class Settings < RailsSettings::CachedSettings
-  def self.create_csv type  
+  def self.generate_cvs_string(users_docs, users_art)
     require 'csv'     
-    @accepted_users = Submitter.joins(type).where("accepted = true").select("first_name", "last_name", "bio", "school", "teacher", "{type}.title")
-    puts @accepted_users
     csv_string = CSV.generate do |csv|
-       csv << ["First Name", "Last Name", "Bio", "School", "Teacher", "Title"]
-       @accepted_users.each do |user|
-         csv << [user.first_name, user.last_name, user.bio, user.school, user.teacher, user.title]
+       csv << ["First Name", "Last Name", "Email", "Bio", "School", "Teacher", "Type", "Title"]
+       users_docs.each do |user|
+         csv << [user.first_name, user.last_name, user.email, user.bio, user.school, user.teacher, user.style, user.title]
+       end
+       users_art.each do |user|
+         csv << [user.first_name, user.last_name, user.email, user.bio, user.school, user.teacher, "Art", user.title]
        end
     end
-    puts csv_string
-  end      
+  end   
 end

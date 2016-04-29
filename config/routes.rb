@@ -71,6 +71,7 @@ Rails.application.routes.draw do
   resources :settings, only: [:index, :edit, :update] do
     collection do
       get 'export_to_csv'
+      get 'export_rejected_to_csv'
     end
   end
 
