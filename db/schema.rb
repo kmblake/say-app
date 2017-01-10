@@ -37,9 +37,9 @@ ActiveRecord::Schema.define(version: 20161229194235) do
     t.integer  "document_id"
     t.integer  "user_id"
     t.integer  "artwork_id"
+    t.boolean  "title_suggestion"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "title_suggestion"
   end
 
   create_table "documents", force: true do |t|
