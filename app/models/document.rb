@@ -76,7 +76,7 @@ class Document < ActiveRecord::Base
       return -1
     else
       minRatingsCount = Document.where.not(id: already_rated).minimum(:ratings_count)
-      return Document.select(:id).where(ratings_count: minRatingsCount).where(average_rating: 3.0).where.not(id: already_rated).order("RANDOM()").first.id
+      return Document.select(:id).where(ratings_count: minRatingsCount).where.not(id: already_rated).order("RANDOM()").first.id
     end
   end
 
