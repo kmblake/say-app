@@ -75,7 +75,8 @@ class Document < ActiveRecord::Base
     if already_rated.length == Document.count()
       return -1
     else
-      minRatingsCount = Document.where.not(id: already_rated).minimum(:ratings_count)
+      # minRatingsCount = Document.where.not(id: already_rated).minimum(:ratings_count)
+      minRatingsCount = 3
       return Document.select(:id).where(ratings_count: minRatingsCount).where.not(id: already_rated).order("RANDOM()").first.id
     end
   end
