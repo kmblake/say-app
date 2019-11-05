@@ -46,7 +46,7 @@ gem 'cancancan', '~> 1.9'
 gem 'devise'
 
 # Bootstrap
-gem 'bootstrap-sass', '~> 3.3.1'
+gem 'bootstrap-sass', '~> 3.4.1'
 gem "bootstrap-switch-rails"
 
 # Paperclip for file upload
